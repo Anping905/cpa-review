@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title>CPA 考点通关 - 经济法×战略</title>
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="CPA通关">
+<link rel="apple-touch-icon" href="icon-192.png">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;transition:background .3s,color .3s}
 :root{--bg:#f0f2f5;--card:#fff;--text:#1a1a2e;--text2:#636e72;--text3:#999;--pri:#6c5ce7;--pri2:#a29bfe;--pri3:#dfe6e9;--green:#00b894;--orange:#fdcb6e;--red:#e17055;--blue:#0984e3;--pink:#fd79a8;--shadow:0 4px 16px rgba(108,92,231,.12);--radius:14px;--border:#e8e8e8}
@@ -1495,6 +1500,10 @@ floatBtn.onclick=fcStart;
 document.body.appendChild(floatBtn);
 
 render();
+
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('sw.js').catch(function(){});
+}
 </script>
 </body>
 </html>
