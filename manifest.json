@@ -1,0 +1,26 @@
+{
+  "name": "CPA考点通关",
+  "short_name": "CPA通关",
+  "description": "注册会计师考试·经济法+战略·考点速记+真题演练+知识点串烧",
+  "start_url": "/cpa-review/",
+  "scope": "/cpa-review/",
+  "display": "standalone",
+  "background_color": "#6c5ce7",
+  "theme_color": "#6c5ce7",
+  "orientation": "portrait",
+  "categories": ["education", "reference"],
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
