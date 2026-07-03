@@ -203,6 +203,23 @@ body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;backgr
 .fw-roadmap .rstep .rnum{width:24px;height:24px;border-radius:12px;background:var(--pri);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .fw-roadmap .rstep .rtxt{font-size:12px;color:var(--text2);line-height:1.5;flex:1}
 .fw-roadmap .rstep .rtxt b{color:var(--text)}
+/* login overlay */
+.login-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:999;justify-content:center;align-items:center;padding:20px}
+.login-overlay.show{display:flex}
+.login-box{background:var(--card);border-radius:20px;width:100%;max-width:360px;padding:28px 24px;box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.login-box .lhd{font-size:20px;font-weight:700;text-align:center;margin-bottom:4px}
+.login-box .lsub{font-size:13px;color:var(--text2);text-align:center;margin-bottom:20px;line-height:1.5}
+.login-box .linp{width:100%;padding:12px 16px;border:2px solid var(--border);border-radius:12px;font-size:16px;outline:none;background:var(--bg);color:var(--text);margin-bottom:14px}
+.login-box .linp:focus{border-color:var(--pri)}
+.login-box .lbtn{width:100%;padding:12px;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;background:linear-gradient(135deg,var(--pri),var(--pink));color:#fff}
+.login-box .lusers{margin-bottom:14px}
+.login-box .lusers .lu{padding:10px 14px;border-radius:10px;font-size:14px;cursor:pointer;background:var(--bg);color:var(--text);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.login-box .lusers .lu:hover{background:var(--pri2);color:#fff}
+.login-box .lusers .lu .luico{font-size:20px}
+.login-box .lusers .lu .luname{flex:1}
+.login-box .lusers .lu .ludel{font-size:12px;color:var(--red);cursor:pointer;padding:2px 6px;border-radius:4px}
+.login-box .lusers .lu .ludel:hover{background:var(--red);color:#fff}
+.login-box .lhint{font-size:11px;color:var(--text3);text-align:center;margin-top:10px}
 </style>
 </head>
 <body>
@@ -210,6 +227,7 @@ body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;backgr
 <div class="top">
   <h1>🧠 CPA 考点通关</h1>
   <div class="top-actions">
+    <button onclick="showLogin()" id="userBtn" title="切换用户">👤</button>
     <button onclick="toggleDark()" id="darkBtn">🌙</button>
     <button onclick="resetAll()">🔄</button>
   </div>
@@ -232,6 +250,16 @@ body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;backgr
 <div class="exam-wrap" id="examWrap"></div>
 <div class="mash-wrap" id="mashWrap"></div>
 <div class="fw-wrap" id="fwWrap"></div>
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-box">
+    <div class="lhd">👋 欢迎使用 CPA 考点通关</div>
+    <div class="lsub">设置一个名字，学习记录会单独保存<br>和朋友共享此链接，各学各的互不干扰</div>
+    <input class="linp" id="loginInp" placeholder="输入你的名字..." maxlength="12" autocomplete="off">
+    <div class="lusers" id="loginUsers"></div>
+    <button class="lbtn" id="loginBtn">🚀 开始学习</button>
+    <div class="lhint">数据仅保存在你自己的手机浏览器中</div>
+  </div>
+</div>
 
 <div class="fc-overlay" id="fcOverlay">
   <div class="fc-box">
@@ -593,21 +621,31 @@ const EXAMS = {
   ]
 };
 
+var USER = localStorage.getItem('cpa_user')||'';
+function up(k){return USER ? 'cpa_'+USER+'_'+k : 'cpa_'+k}
+
 const S = {
   sub: 'jjf',
-  memo: JSON.parse(localStorage.getItem('cpa_memo')||'{}'),
-  star: JSON.parse(localStorage.getItem('cpa_star')||'{}'),
-  weak: JSON.parse(localStorage.getItem('cpa_weak')||'{}'),
-  dark: localStorage.getItem('cpa_dark')==='true',
+  memo: {}, star: {}, weak: {},
+  dark: false,
   page: 'main',
   fq: [], fi: 0
 };
 
+function loadUserData(){
+  if(!USER) return;
+  S.memo = JSON.parse(localStorage.getItem(up('memo'))||'{}');
+  S.star = JSON.parse(localStorage.getItem(up('star'))||'{}');
+  S.weak = JSON.parse(localStorage.getItem(up('weak'))||'{}');
+  S.dark = localStorage.getItem(up('dark'))==='true';
+}
+
 function save(){
-  localStorage.setItem('cpa_memo',JSON.stringify(S.memo));
-  localStorage.setItem('cpa_star',JSON.stringify(S.star));
-  localStorage.setItem('cpa_weak',JSON.stringify(S.weak));
-  localStorage.setItem('cpa_dark',S.dark);
+  if(!USER) return;
+  localStorage.setItem(up('memo'),JSON.stringify(S.memo));
+  localStorage.setItem(up('star'),JSON.stringify(S.star));
+  localStorage.setItem(up('weak'),JSON.stringify(S.weak));
+  localStorage.setItem(up('dark'),S.dark);
 }
 function k(s,ci,pi){return s+'-'+ci+'-'+pi}
 function allPts(s){
@@ -622,6 +660,7 @@ function allPts(s){
 function count(sub){let p=allPts(sub);return{p:Object.keys(S.memo).filter(x=>S.memo[x]&&x.startsWith(sub)).length,t:p.length}}
 
 function render(){
+  if(USER) document.getElementById('userBtn').textContent='👤'+USER;
   const sub=S.sub;
   const wrap=document.getElementById('mainWrap');
   let html='';
@@ -789,10 +828,79 @@ function fcClose(){document.getElementById('fcOverlay').classList.remove('show')
 
 // dark mode
 function toggleDark(){S.dark=!S.dark;document.body.classList.toggle('dark',S.dark);document.getElementById('darkBtn').textContent=S.dark?'☀️':'🌙';save()}
-if(S.dark){document.body.classList.add('dark');document.getElementById('darkBtn').textContent='☀️'}
 
 // reset
-function resetAll(){if(!confirm('确定重置所有学习进度（含真题记录）？'))return;localStorage.clear();S.memo={};S.star={};S.weak={};examAnswered={};render()}
+function resetAll(){if(!confirm('确定重置你的学习进度（含真题记录）？'))return;if(!USER)return;Object.keys(localStorage).filter(k=>k.startsWith('cpa_'+USER)).forEach(k=>localStorage.removeItem(k));S.memo={};S.star={};S.weak={};examAnswered={};save();saveExam();render()}
+
+// --- 多用户系统 ---
+function showLogin(switchMode){
+  document.getElementById('loginOverlay').classList.add('show');
+  document.getElementById('loginInp').value='';
+  document.getElementById('loginInp').focus();
+
+  // show existing users
+  const users=[];
+  Object.keys(localStorage).forEach(k=>{
+    const m=k.match(/^cpa_(.+?)_memo$/);
+    if(m && !users.includes(m[1])) users.push(m[1]);
+  });
+  const container=document.getElementById('loginUsers');
+  if(users.length){
+    let html='<div style="font-size:12px;color:var(--text2);margin-bottom:6px">已有学习记录的用户：</div>';
+    users.forEach(u=>{
+      const active=(u===USER?' 👈 当前':'');
+      html+=`<div class="lu" onclick="switchToUser('${u}')">
+        <span class="luico">👤</span>
+        <span class="luname">${u}${active}</span>
+        <span class="ludel" onclick="event.stopPropagation();deleteUser('${u}')">删除</span>
+      </div>`;
+    });
+    container.innerHTML=html;
+  } else {
+    container.innerHTML='';
+  }
+}
+
+function switchToUser(name){
+  if(!name.trim()) return;
+  if(name===USER){document.getElementById('loginOverlay').classList.remove('show');return}
+  localStorage.setItem('cpa_user',name);
+  USER=name;
+  loadUserData();
+  loadExam();
+  document.getElementById('loginOverlay').classList.remove('show');
+  document.getElementById('userBtn').textContent='👤'+USER;
+  document.getElementById('darkBtn').textContent=S.dark?'☀️':'🌙';
+  if(S.dark) document.body.classList.add('dark'); else document.body.classList.remove('dark');
+  render();
+}
+
+function deleteUser(name){
+  if(!confirm('确定删除「'+name+'」的所有学习记录？'))return;
+  Object.keys(localStorage).filter(k=>k.startsWith('cpa_'+name)).forEach(k=>localStorage.removeItem(k));
+  showLogin();
+}
+
+// Login button
+document.getElementById('loginBtn').addEventListener('click',function(){
+  const name=document.getElementById('loginInp').value.trim();
+  if(!name){document.getElementById('loginInp').style.borderColor='var(--red)';return}
+  document.getElementById('loginInp').style.borderColor='';
+  switchToUser(name);
+});
+document.getElementById('loginInp').addEventListener('keydown',function(e){
+  if(e.key==='Enter') document.getElementById('loginBtn').click();
+});
+
+// Init: if user exists, load data; otherwise show login
+if(USER){
+  loadUserData();
+  loadExam();
+  document.getElementById('userBtn').textContent='👤'+USER;
+} else {
+  // show login after page loads
+  window.addEventListener('DOMContentLoaded',function(){showLogin()});
+}
 
 // pages
 document.querySelectorAll('.bot div').forEach(el=>{
@@ -810,8 +918,9 @@ document.querySelectorAll('.bot div').forEach(el=>{
   });
 });
 
-let examAnswered = JSON.parse(localStorage.getItem('cpa_exam')||'{}');
-function saveExam(){localStorage.setItem('cpa_exam',JSON.stringify(examAnswered))}
+let examAnswered = {};
+function loadExam(){examAnswered = JSON.parse(localStorage.getItem(up('exam'))||'{}')}
+function saveExam(){if(USER)localStorage.setItem(up('exam'),JSON.stringify(examAnswered))}
 var examCurrentFilter = 'all';
 
 function showExamPage(){
