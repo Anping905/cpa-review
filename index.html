@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>CPA 考点通关 - 经济法×战略</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;transition:background .3s,color .3s}
+:root{--bg:#f0f2f5;--card:#fff;--text:#1a1a2e;--text2:#636e72;--text3:#999;--pri:#6c5ce7;--pri2:#a29bfe;--pri3:#dfe6e9;--green:#00b894;--orange:#fdcb6e;--red:#e17055;--blue:#0984e3;--pink:#fd79a8;--shadow:0 4px 16px rgba(108,92,231,.12);--radius:14px;--border:#e8e8e8}
+.dark{--bg:#0f0f1a;--card:#1a1a2e;--text:#e8e8e8;--text2:#a0a0b0;--text3:#666;--pri:#a29bfe;--pri2:#6c5ce7;--pri3:#2d2d3e;--border:#2a2a3a;--shadow:0 4px 16px rgba(0,0,0,.3)}
+body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);padding:0 0 80px 0;min-height:100vh;overflow-x:hidden}
+.top{position:sticky;top:0;z-index:100;background:var(--card);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.top h1{font-size:17px;font-weight:700;background:linear-gradient(135deg,var(--pri),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.top-actions{display:flex;gap:6px}
+.top-actions button{background:var(--bg);border:none;width:34px;height:34px;border-radius:50%;font-size:15px;cursor:pointer;color:var(--text2);display:flex;align-items:center;justify-content:center}
+.sub-bar{position:sticky;top:52px;z-index:99;background:var(--card);display:flex;padding:6px 12px;gap:6px;overflow-x:auto;border-bottom:1px solid var(--border)}
+.sub-bar div{flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;color:var(--text2);background:var(--bg);transition:all .2s}
+.sub-bar div.active{background:var(--pri);color:#fff}
+.sub-bar div .ct{font-size:10px;margin-left:4px;opacity:.7}
+.scroll-wrap{display:none;padding:12px 14px 20px}
+.scroll-wrap.show{display:block}
+.search-row{padding:0 14px 10px}
+.search-row input{width:100%;padding:11px 16px;border:2px solid var(--border);border-radius:var(--radius);font-size:14px;background:var(--card);color:var(--text);outline:none}
+.search-row input:focus{border-color:var(--pri)}
+.stat-row{padding:0 14px 10px;display:flex;gap:8px;font-size:12px;color:var(--text2);flex-wrap:wrap}
+.stat-row span{background:var(--card);padding:4px 12px;border-radius:16px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+/* mind-map card */
+.mind{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:14px;overflow:hidden;border:1px solid var(--border)}
+.mind-hd{padding:16px 16px 12px;display:flex;align-items:center;gap:10px;cursor:pointer}
+.mind-hd .ico{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.mind-hd .info{flex:1}
+.mind-hd .info .nm{font-size:15px;font-weight:700}
+.mind-hd .info .sub{font-size:11px;color:var(--text2);margin-top:2px}
+.mind-hd .bar-wrap{width:60px;height:4px;background:var(--bg);border-radius:2px;overflow:hidden;flex-shrink:0}
+.mind-hd .bar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--green),var(--pri));transition:width .5s}
+.mind-hd .arr{font-size:12px;color:var(--text2);transform:rotate(0);transition:transform .3s;flex-shrink:0}
+.mind-hd .arr.open{transform:rotate(180deg)}
+.mind-bd{display:none;padding:0 16px 16px}
+.mind-bd.open{display:block}
+.knot{background:var(--bg);border-radius:10px;padding:14px;margin-bottom:10px;border-left:3px solid var(--pri);position:relative;cursor:pointer}
+.knot:last-child{margin-bottom:0}
+.knot .kw{font-size:14px;font-weight:700;display:flex;align-items:center;gap:6px}
+.knot .kw .tag{font-size:10px;background:var(--pri2);color:#fff;padding:1px 8px;border-radius:10px;font-weight:400}
+.knot .life{display:none;margin-top:10px;padding:10px 12px;background:var(--card);border-radius:8px;border:1px dashed var(--pri2);font-size:13px;line-height:1.7;color:var(--text2)}
+.knot .life .lb{font-size:11px;color:var(--pri);font-weight:600;margin-bottom:4px}
+.knot .life.show{display:block}
+.knot .detail{display:none;margin-top:8px;font-size:12px;line-height:1.7;color:var(--text2)}
+.knot .detail.show{display:block}
+.knot .foot{display:flex;gap:10px;margin-top:8px;align-items:center;font-size:11px}
+.knot .foot .btn{color:var(--text3);cursor:pointer;padding:2px 6px;border-radius:4px}
+.knot .foot .btn:hover{color:var(--pri)}
+.knot .foot .btn.star{color:var(--text3)}
+.knot .foot .btn.star.on{color:var(--orange)}
+.knot .foot .btn.mem{color:var(--text3)}
+.knot .foot .btn.mem.on{color:var(--green)}
+.knot .foot .btn.weak{color:var(--text3)}
+.knot .foot .btn.weak.on{color:var(--red)}
+.knot .foot .btn.mind{color:var(--text3)}
+.knot.memo{border-left-color:var(--green)}
+.knot.memo::after{content:'✓';position:absolute;top:12px;right:12px;color:var(--green);font-weight:700;font-size:14px}
+.knot.weak{border-left-color:var(--red)}
+.knot.starred{border-left-color:var(--orange)}
+.mode-badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;margin-left:4px}
+.mode-badge.m1{background:#dfe6e9;color:var(--text2)}
+.mode-badge.m2{background:#ffeaa7;color:#b7950b}
+.mode-badge.m3{background:#fab1a0;color:#c0392b}
+/* flashcard overhaul */
+.fc-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:200;justify-content:center;align-items:center;padding:16px}
+.fc-overlay.show{display:flex}
+.fc-box{background:var(--card);border-radius:20px;width:100%;max-width:400px;min-height:340px;padding:24px 20px;position:relative;box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.fc-close{position:absolute;top:14px;right:16px;font-size:18px;cursor:pointer;color:var(--text2);border:none;background:none;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%}
+.fc-close:hover{background:var(--bg)}
+.fc-bar{text-align:center;font-size:12px;color:var(--text2);margin-bottom:10px}
+.fc-head{font-size:11px;color:var(--pri);margin-bottom:2px}
+.fc-ch{font-size:11px;color:var(--text2);margin-bottom:14px}
+.fc-q{font-size:18px;font-weight:700;line-height:1.5;margin-bottom:10px;padding:14px 0;cursor:pointer}
+.fc-q .hint{font-size:13px;color:var(--text3);font-weight:400}
+.fc-life{display:none;font-size:13px;line-height:1.7;color:var(--text2);background:var(--bg);border-radius:10px;padding:12px;margin-bottom:10px;border-left:3px solid var(--orange)}
+.fc-life.show{display:block}
+.fc-life .lb{font-size:11px;color:var(--orange);font-weight:600}
+.fc-a{display:none;font-size:14px;line-height:1.8;color:var(--text);background:var(--bg);border-radius:10px;padding:14px;margin-bottom:12px}
+.fc-a.show{display:block}
+.fc-acts{display:flex;gap:8px;flex-wrap:wrap}
+.fc-acts button{flex:1;min-width:70px;padding:10px;border:none;border-radius:10px;font-size:13px;cursor:pointer;font-weight:600}
+.fc-dunno{background:var(--red);color:#fff}
+.fc-know{background:var(--green);color:#fff}
+.fc-next{background:var(--pri);color:#fff}
+.fc-done{background:var(--pri);color:#fff}
+/* progress circle */
+.prog-circle{position:relative;width:60px;height:60px;margin:0 auto}
+.prog-circle svg{transform:rotate(-90deg)}
+.prog-circle .bg{fill:none;stroke:var(--bg);stroke-width:6}
+.prog-circle .fg{fill:none;stroke:var(--pri);stroke-width:6;stroke-linecap:round;transition:stroke-dashoffset 1s}
+.prog-circle .num{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:16px;font-weight:700}
+/* bottom nav */
+.bot{position:fixed;bottom:0;left:0;right:0;background:var(--card);display:flex;border-top:1px solid var(--border);z-index:100;padding:4px 0;padding-bottom:env(safe-area-inset-bottom)}
+.bot div{flex:1;text-align:center;padding:6px 0;font-size:10px;color:var(--text2);cursor:pointer}
+.bot div .ic{font-size:20px;display:block;margin-bottom:2px}
+.bot div.active{color:var(--pri)}
+/* special pages */
+.spec{display:none;padding:14px}
+.spec.show{display:block}
+.spec .hd{font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.grid-item{background:var(--card);border-radius:var(--radius);padding:16px;text-align:center;box-shadow:var(--shadow);cursor:pointer}
+.grid-item .num{font-size:24px;font-weight:700;color:var(--pri)}
+.grid-item .lbl{font-size:12px;color:var(--text2);margin-top:4px}
+/* exam questions */
+.exam-wrap{display:none;padding:12px 14px}
+.exam-wrap.show{display:block}
+.exam-hd{font-size:16px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.exam-hd .esub{font-size:11px;background:var(--pri2);color:#fff;padding:2px 10px;border-radius:10px}
+.exam-info{font-size:12px;color:var(--text2);margin-bottom:12px}
+.exam-q{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;margin-bottom:14px;border:1px solid var(--border)}
+.exam-q .qhead{font-size:13px;font-weight:600;margin-bottom:8px;display:flex;gap:6px}
+.exam-q .qhead .qtag{font-size:10px;background:var(--orange);color:#fff;padding:1px 8px;border-radius:8px}
+.exam-q .qtext{font-size:14px;line-height:1.7;margin-bottom:10px}
+.exam-q .opts{display:flex;flex-direction:column;gap:6px}
+.exam-q .opt{padding:10px 14px;border-radius:8px;font-size:13px;cursor:pointer;border:2px solid var(--border);background:var(--bg);transition:all .2s}
+.exam-q .opt:hover{border-color:var(--pri2)}
+.exam-q .opt.sel{border-color:var(--pri);background:var(--pri);color:#fff}
+.exam-q .opt.cor{border-color:var(--green);background:var(--green);color:#fff}
+.exam-q .opt.wro{border-color:var(--red);background:var(--red);color:#fff}
+.exam-q .opt.dis{cursor:default;pointer-events:none}
+.exam-q .explain{display:none;margin-top:10px;padding:12px;background:var(--bg);border-radius:8px;border-left:3px solid var(--pri);font-size:12px;line-height:1.7;color:var(--text2)}
+.exam-q .explain.show{display:block}
+.exam-q .explain .elb{font-size:11px;color:var(--pri);font-weight:600;margin-bottom:4px}
+.exam-q .explain .eans{color:var(--green);font-weight:700}
+.exam-q .explain .elif{display:block;margin-top:6px;padding:8px;background:var(--card);border-radius:6px;border:1px dashed var(--orange);font-size:12px}
+.exam-nav{display:flex;gap:8px;justify-content:center;padding:8px 0 20px}
+.exam-nav button{padding:8px 20px;border:none;border-radius:8px;font-size:13px;cursor:pointer;font-weight:600}
+.exam-nav .eprev{background:var(--bg);color:var(--text2)}
+.exam-nav .enext{background:var(--pri);color:#fff}
+.exam-nav .esubmit{background:var(--green);color:#fff}
+.exam-empty{text-align:center;padding:40px 20px;color:var(--text2);font-size:14px}
+/* mashup */
+.mash-wrap{display:none;padding:12px 14px}
+.mash-wrap.show{display:block}
+.mash-hd{font-size:16px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.mash-hd .msub{font-size:11px;background:var(--pink);color:#fff;padding:2px 10px;border-radius:10px}
+.mash-stat{display:flex;gap:8px;margin-bottom:12px;font-size:12px;color:var(--text2);flex-wrap:wrap}
+.mash-stat span{background:var(--card);padding:6px 14px;border-radius:16px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.mash-box{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;margin-bottom:12px;border:1px solid var(--border)}
+.mash-box .m-sub{font-size:11px;color:var(--pri);margin-bottom:2px}
+.mash-box .m-ch{font-size:11px;color:var(--text3);margin-bottom:12px}
+.mash-box .m-q{font-size:18px;font-weight:700;line-height:1.5}
+.mash-box .m-life{display:none;margin-top:12px;padding:12px;background:var(--bg);border-radius:8px;border-left:3px solid var(--orange);font-size:13px;line-height:1.7}
+.mash-box .m-life.show{display:block}
+.mash-box .m-life .mlb{font-size:11px;color:var(--orange);font-weight:600}
+.mash-box .m-detail{display:none;margin-top:10px;padding:14px;background:var(--bg);border-radius:10px;font-size:13px;line-height:1.7}
+.mash-box .m-detail.show{display:block}
+.mash-box .m-hint{text-align:center;color:var(--text3);font-size:13px;margin:8px 0;cursor:pointer}
+.mash-acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.mash-acts button{flex:1;min-width:70px;padding:10px;border:none;border-radius:10px;font-size:13px;cursor:pointer;font-weight:600}
+.mash-acts .mknow{background:var(--green);color:#fff}
+.mash-acts .mdunno{background:var(--red);color:#fff}
+.mash-acts .mskip{background:var(--pri);color:#fff}
+.mash-acts .mdone{background:var(--pri);color:#fff}
+.mash-streak{text-align:center;font-size:12px;color:var(--text2);margin-top:8px}
+.mash-streak .fire{color:var(--orange);font-size:16px}
+/* compare cards */
+.comp-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.comp-card{background:var(--card);border-radius:var(--radius);padding:14px;border:1px solid var(--border);box-shadow:var(--shadow)}
+.comp-card .c-hd{font-size:12px;font-weight:700;margin-bottom:6px;padding-bottom:6px;border-bottom:2px solid var(--pri2)}
+.comp-card .c-item{font-size:11px;color:var(--text2);padding:3px 0;line-height:1.5}
+.comp-card .c-item b{color:var(--text)}
+.mash-picker{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.mash-picker div{padding:6px 14px;border-radius:16px;font-size:12px;cursor:pointer;background:var(--card);color:var(--text2);border:1px solid var(--border);transition:all .2s}
+.mash-picker div.active{background:var(--pri);color:#fff;border-color:var(--pri)}
+/* framework */
+.fw-wrap{display:none;padding:12px 14px}
+.fw-wrap.show{display:block}
+.fw-top{background:linear-gradient(135deg,var(--pri),var(--pink));border-radius:var(--radius);padding:18px;color:#fff;margin-bottom:14px;box-shadow:0 4px 16px rgba(108,92,231,.25)}
+.fw-top .fwnm{font-size:17px;font-weight:700;margin-bottom:4px}
+.fw-top .fwdesc{font-size:12px;opacity:.9;line-height:1.5}
+.fw-top .fwstat{display:flex;gap:12px;margin-top:8px;font-size:11px}
+.fw-top .fwstat span{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px}
+.fw-path{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.fw-path div{padding:5px 12px;border-radius:16px;font-size:11px;cursor:pointer;background:var(--card);color:var(--text2);border:1px solid var(--border);transition:all .2s}
+.fw-path div.active{background:var(--pri);color:#fff;border-color:var(--pri)}
+.fw-ch{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;margin-bottom:12px;border:1px solid var(--border);border-left:4px solid var(--pri);cursor:pointer}
+.fw-ch:active{transform:scale(.99)}
+.fw-ch .fchd{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.fw-ch .fchd .fnum{font-size:20px;font-weight:800;color:var(--pri)}
+.fw-ch .fchd .fname{font-size:15px;font-weight:700;flex:1}
+.fw-ch .fchd .fstar{font-size:12px;color:var(--orange)}
+.fw-ch .fess{font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:6px}
+.fw-ch .fmeta{display:flex;gap:6px;flex-wrap:wrap;font-size:10px;margin-bottom:4px}
+.fw-ch .fmeta span{background:var(--bg);padding:2px 8px;border-radius:8px}
+.fw-ch .fmeta .fw{background:var(--pri2);color:#fff}
+.fw-ch .fmeta .fdiff{background:var(--orange);color:#fff}
+.fw-ch .fqslink{display:none;margin-top:8px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:11px;line-height:1.6;color:var(--text2)}
+.fw-ch .fqslink.show{display:block}
+.fw-ch .fqslink b{color:var(--pri)}
+.fw-ch .ftip{display:none;margin-top:6px;padding:8px 10px;background:#ffeaa7;border-radius:6px;font-size:11px;color:#6b5900;line-height:1.5}
+.fw-ch .ftip.show{display:block}
+.fw-bigq{display:none;margin-top:6px;padding:8px 10px;background:var(--card);border-radius:6px;border:1px dashed var(--pri2);font-size:11px;line-height:1.6;color:var(--text2)}
+.fw-bigq.show{display:block}
+.fw-bigq .bqlb{color:var(--pri);font-weight:600}
+.fw-roadmap{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;margin-bottom:12px;border:1px solid var(--border)}
+.fw-roadmap .rhd{font-size:14px;font-weight:700;margin-bottom:10px}
+.fw-roadmap .rstep{display:flex;gap:10px;margin-bottom:8px;align-items:flex-start}
+.fw-roadmap .rstep .rnum{width:24px;height:24px;border-radius:12px;background:var(--pri);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.fw-roadmap .rstep .rtxt{font-size:12px;color:var(--text2);line-height:1.5;flex:1}
+.fw-roadmap .rstep .rtxt b{color:var(--text)}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <h1>🧠 CPA 考点通关</h1>
+  <div class="top-actions">
+    <button onclick="toggleDark()" id="darkBtn">🌙</button>
+    <button onclick="resetAll()">🔄</button>
+  </div>
+</div>
+<div class="sub-bar" id="subBar">
+  <div class="active" data-s="jjf">📜 经济法 <span class="ct" id="jjfCt">0/96</span></div>
+  <div data-s="zl">🎯 战略 <span class="ct" id="zlCt">0/60</span></div>
+  <div data-s="mixed">🔀 混合刷</div>
+  <div data-s="exam">📝 真题</div>
+  <div data-s="mashup">🔥 串烧</div>
+  <div data-s="fw">📐 体系</div>
+</div>
+<div class="search-row"><input id="searchInp" placeholder="🔍 搜考点..."></div>
+<div class="stat-row" id="statRow"></div>
+
+<div class="scroll-wrap show" id="mainWrap"></div>
+<div class="spec" id="starWrap"></div>
+<div class="spec" id="weakWrap"></div>
+<div class="spec" id="aboutWrap"></div>
+<div class="exam-wrap" id="examWrap"></div>
+<div class="mash-wrap" id="mashWrap"></div>
+<div class="fw-wrap" id="fwWrap"></div>
+
+<div class="fc-overlay" id="fcOverlay">
+  <div class="fc-box">
+    <button class="fc-close" onclick="fcClose()">✕</button>
+    <div class="fc-bar" id="fcBar"></div>
+    <div class="fc-head" id="fcHead"></div>
+    <div class="fc-ch" id="fcCh"></div>
+    <div class="fc-q" id="fcQ">考点内容</div>
+    <div class="fc-life" id="fcLife"></div>
+    <div class="fc-a" id="fcA"></div>
+    <div class="fc-acts" id="fcActs">
+      <button class="fc-dunno" onclick="fcAct('dunno')">❌ 不会</button>
+      <button class="fc-know" onclick="fcAct('know')">✅ 已会</button>
+      <button class="fc-next" onclick="fcNext()">⏭ 下一题</button>
+    </div>
+  </div>
+</div>
+
+<div class="bot">
+  <div class="active" data-p="main"><span class="ic">📚</span>学习</div>
+  <div data-p="exam"><span class="ic">📝</span>真题</div>
+  <div data-p="mashup"><span class="ic">🔥</span>串烧</div>
+  <div data-p="fw"><span class="ic">📐</span>体系</div>
+  <div data-p="star"><span class="ic">⭐</span>收藏</div>
+  <div data-p="weak"><span class="ic">💪</span>弱项</div>
+  <div data-p="about"><span class="ic">ℹ️</span>关于</div>
+</div>
+
+<script>
+const DATA = {
+  jjf: {
+    name:'经济法', icon:'📜', color:'#6c5ce7',
+    chapters:[
+      { name:'第1章 法律基本原理', icon:'⚖️',
+        points:[
+          { kw:'法律规范的种类', tag:'基础',
+            life:'就像学校的校规：有的告诉你"必须穿校服"（义务性），有的说"可以参加社团"（授权性），有的说"不准打架"（禁止性）。\n按强度分：强行性=死规定→必须遵守；任意性=可商量→双方可约定不同。',
+            detail:'①按内容：授权性、义务性、禁止性。②按强弱：强行性↔任意性。③按确定性：确定性、委任性、准用性。' },
+          { kw:'法律渊源的层级排序', tag:'必考',
+            life:'像国家的"权力金字塔"：宪法是老大（国王），法律是部长，行政法规是市长，部门规章是科长。\n下层不能违反上层，就像科长不能推翻国王的决定。',
+            detail:'宪法 > 法律 > 行政法规 > 地方性法规 > 部门规章 > 司法解释 > 国际条约。下位法不得违反上位法。' },
+          { kw:'自然人民事行为能力', tag:'高频',
+            life:'就像玩游戏的分级制度：\n• ≥18岁（或16岁+打工养活自己）= 满级号→什么都能干\n• 8-17岁 = 未成年人模式→只能干小事（买零食），大事要家长同意\n• <8岁 = 幼儿模式→买辣条都得家长代劳',
+            detail:'①完全：≥18岁（或16岁+自食其力）。②限制：8≤年龄<18（或不能完全辨认）。③无：<8岁（或完全不能辨认）。' },
+          { kw:'法人的分类', tag:'基础',
+            life:'法人不是真人，而是"法律上的人"，就像一个虚拟角色：\n• 公司（营利法人）→ 开公司赚钱\n• 学校/医院（非营利法人）→ 干正事不赚钱分红\n• 政府机关（特别法人）→ 管事的',
+            detail:'①营利法人（公司等）。②非营利法人（事业单位、社会团体、基金会等）。③特别法人（机关法人、农村集体经济组织等）。' },
+          { kw:'法律事实 = 引起法律关系变化的事件', tag:'理解',
+            life:'就像游戏里的"触发器"：\n• 事件（你没法控制的）：下暴雨→航班取消→退票纠纷（自然事件）\n• 行为（你能控制的）：你签了租房合同→合同生效（法律行为）',
+            detail:'分类：①事件（自然事件、社会事件）。②行为（法律行为、事实行为、违法行为）。' },
+        ]},
+      { name:'第2章 基本民事法律制度', icon:'📋',
+        points:[
+          { kw:'附条件 vs 附期限', tag:'易混',
+            life:'好比你对朋友说：\n• "如果明天不下雨，我们就去烧烤" → 附条件（下不下雨不确定）\n• "下周六我们去烧烤" → 附期限（周六一定会来）\n条件=不确定；期限=一定到',
+            detail:'条件：将来可能发生也可能不发生（不确定）。期限：将来一定会到来（确定）。附条件的法律行为在条件成就时生效/失效。' },
+          { kw:'无效 vs 可撤销法律行为', tag:'重点',
+            life:'好比考试作弊被抓：\n• 无效=直接0分（从小到大的成绩都作废）→ 无民事行为能力/虚假/违法/恶意串通\n• 可撤销=有瑕疵但可以补救 → 重大误解/被骗/被强迫/不公平\n\n区别：无效=天生不行；可撤销=暂时有效，但1年内可以反悔',
+            detail:'无效：①无民事行为能力人。②虚假意思。③违法/公序良俗。④恶意串通。\n可撤销：①重大误解（90日）。②欺诈。③胁迫（1年）。④显失公平（1年）。最长5年。' },
+          { kw:'表见代理 = "看起来像真的"', tag:'高频',
+            life:'你邻居穿着顺丰工服、开顺丰车来取你的快递，你以为他是顺丰员工就给他了。结果他是冒牌的。但法律会说：顺丰得赔你，因为顺丰"制造了他像真员工的假象"（穿工服、开车）。\n条件：①假代理。②你不知情。③有"像真的"假象。④公司有责任。',
+            detail:'表见代理有效（被代理人承担责任）。要件：①无代理权。②相对人善意。③有权利外观。④被代理人可归责。' },
+          { kw:'诉讼时效 = "过期不候"', tag:'高频',
+            life:'就像超市购物小票上写的"7天内可退换"，过了7天商家就不认了。\n法律上：你知道自己权利被欺负了→3年内要去告（普通时效）。如果一直不知道→最长保护20年（从受欺负那天算）。\n中断：你去告了/对方认错了→重新计时3年。',
+            detail:'普通3年（知道权利受损+义务人起）。4年（国际货物买卖+技术进出口）。最长20年。中止：最后6个月内因不可抗力暂停。中断：起诉/请求/认诺→重算。' },
+        ]},
+      { name:'第3章 物权法律制度', icon:'🏠',
+        points:[
+          { kw:'物权法定 = 不能自己发明"新物权"', tag:'理解',
+            life:'就像游戏里的装备系统：系统规定只能有"武器、防具、饰品"三种类型，你不能自己发明"超级无敌装备"这种新类型。\n物权也一样：法律规定了有啥种类就是啥种类，不能自己创造新物权。两个原则：①种类法定 ②内容法定。',
+            detail:'①物权法定（种类+内容法定）。②物权客体特定（一物一权）。③公示公信（登记/交付+善意保护）。' },
+          { kw:'善意取得 = "不知情的人买东西受保护"', tag:'必考',
+            life:'你室友趁你不在把你的电脑拿去二手店卖了。小明花正常价格买了（不知道电脑是你的）。法律保护小明：电脑归小明了。\n但你可以向室友索赔（让他赔你钱）。\n条件：①小明不知情。②小明花了正常价。③电脑已经交给小明了。',
+            detail:'受让人善意+合理价格+登记/交付→原始取得所有权。原权利人可向无权处分人索赔。' },
+          { kw:'抵押权 vs 质权', tag:'易混',
+            life:'• 抵押=你向银行借钱，把房子抵押给银行，但你还住着（不转移占有）\n• 质押=你去当铺当手表，手表得放当铺里（转移占有）\n简单记：抵押不交东西，质押要交东西。\n抵押常用于房子车子，质押常用于珠宝首饰。',
+            detail:'抵押：不转移占有（不动产+动产）。质权：转移占有（动产+权利）。质押需交付或登记才能设立。' },
+          { kw:'流押条款 = "到期不还东西归我"的约定无效', tag:'坑点',
+            life:'你向高利贷借了5万，约定用你价值50万的房子抵押。合同里写"如果到期不还，房子归债主" → 这叫流押条款，法律说无效！\n为什么？为了保护你，防止债主坑你。只能走正规拍卖流程，多出来的钱还得还给你。',
+            detail:'禁止约定债务人不履行时抵押物归债权人所有（流押条款无效），但抵押权仍成立，可拍卖变卖。' },
+          { kw:'按份共有 vs 共同共有', tag:'对比',
+            life:'• 按份共有=你和朋友一起买了辆车，你出60%他出40%（份额明确），你随时可以卖你的那份\n• 共同共有=夫妻一起买的房，不分你的我的，离婚才能分\n简单记：按份像合伙投资，共同像一家人不分你我',
+            detail:'按份共有：份额明确，可随时请求分割，处分按份额。共同共有：不分份额（夫妻/家庭），关系存续期间不得分割。' },
+        ]},
+      { name:'第4章 合同法律制度', icon:'📝',
+        points:[
+          { kw:'要约 vs 要约邀请', tag:'易混',
+            life:'• 要约=你想买手机，去店里说"这台3000卖不卖？" → 老板说"卖"（承诺）→ 合同成立\n• 要约邀请=老板贴广告"本店手机大促销3000起" → 这是邀请你来出价，不是正式要约\n简单记：要约是"我要买"，要约邀请是"来看看"',
+            detail:'要约：内容具体+表明受约束。要约邀请：希望他人向自己发出要约（拍卖公告、招标公告、商业广告一般不算要约）。' },
+          { kw:'格式条款 = "霸王条款"的规制', tag:'重点',
+            life:'你买机票时勾选的"已阅读并同意"的密密麻麻条款，就是格式条款。\n法律保护你：\n① 如果里面写了"飞机延误概不负责"→ 必须用大字标出来提醒你\n② 如果写"乘客出事航空公司不赔"→ 这种条款无效\n③ 有争议时→ 按对乘客有利的解释来',
+            detail:'①提示说明义务（免除/减轻责任条款）。②不合理免除/减轻责任、加重对方责任、限制主要权利→无效。③争议时作不利于提供方解释。' },
+          { kw:'代位权 vs 撤销权', tag:'高频',
+            life:'• 代位权 = 老王欠你10万，老张欠老王10万，但老王懒得去要。你可以直接去找老张要钱（代替老王的位置去要债）\n• 撤销权 = 老王欠你钱，却把房子低价卖给他亲戚，你可以请求法院"撤销"这笔交易\n前者是"帮你催债"，后者是"防止逃债"',
+            detail:'代位权：债务人怠于行使债权→债权人代位追偿。撤销权：债务人低价/无偿转让财产损害债权人→可请求撤销。' },
+          { kw:'定金规则 = "定金字面看反悔代价"', tag:'实用',
+            life:'你看中了一件衣服，先给了老板100元定金，衣服总价500元。\n• 如果你反悔不要了 → 100元归老板（你亏了定金）\n• 如果老板反悔不卖了 → 要还你200元（双倍返还）\n注意！定金不能超过总价的20%，超过部分无效。\n（别忘了：定金不是订金，订金只是预付款，不双倍返还）',
+            detail:'实践合同（实际交付成立）。≤总价20%，超部分无效。给付方违约→无权收回；收受方违约→双倍返还。' },
+          { kw:'买卖合同风险转移', tag:'重点',
+            life:'你在淘宝买了台电视，快递小哥送的路上摔坏了。谁承担？\n答案是：看货交给快递员的那一刻起，风险就转移给你了（除非商家承诺包送到家）。\n想象：你让朋友帮你保管东西，交接的那一刻起，东西坏了他赔吗？要看约定交付地点。',
+            detail:'标的物交付前卖方承担，交付后买方承担。有约定地点→约定地交付。无约定→货交第一承运人风险即转移。' },
+        ]},
+      { name:'第5章 合伙企业法律制度', icon:'🤝',
+        points:[
+          { kw:'普通合伙 vs 有限合伙', tag:'核心',
+            life:'你和朋友合伙开店：\n• 普通合伙=大家都是"无限责任"→ 店亏了100万，你们得卖房还债（无限连带）\n• 有限合伙=你只当"出资人"→ 亏了最多亏掉你出的那部分钱，不连累个人财产\n简单记：普通=全担责；有限=只亏本金。\n有限合伙至少要有1个普通合伙人（管事的人）。',
+            detail:'普通合伙：全体承担无限连带责任。有限合伙：至少1个普通合伙人（无限）+至少1个有限合伙人（认缴出资额为限）。' },
+          { kw:'普通合伙人财产份额转让', tag:'记忆',
+            life:'如果你在合伙企业中占30%的份额：\n• 卖给外人→必须其他所有合伙人同意（他们有优先购买权）\n• 卖给其他合伙人→通知一声就行了\n就像你们宿舍四个人，你想把自己的床位卖给别人住，得室友都同意。'},
+          { kw:'合伙企业债务清偿顺序', tag:'重点',
+            life:'店亏了欠了100万：\n①先用店里的钱还。\n②不够的话，老板们（普通合伙人）拿自己钱补上（无限连带）。\n③如果老板也欠别人钱→店的财产先还店的债，老板的财产先还老板的债（双重优先原则）。',
+            detail:'①先企业全部财产。②不足时普通合伙人无限连带。③双重优先：企业财产优先还企业债，个人财产优先还个人债。' },
+          { kw:'有限合伙人的特殊权利', tag:'易错',
+            life:'有限合伙人就像"只出钱不说话"的投资人：\n• ✅ 可以和自己投资的公司做生意\n• ✅ 可以自己开一家一样的公司（不违反竞业禁止）\n• ❌ 不能插手公司管理（不执行合伙事务）\n• ✅ 公司亏了不影响个人生活（只亏出资额）',
+            detail:'①不得执行合伙事务。②可与企业交易。③可自营竞争业务。④丧失偿债能力不当然退伙。⑤退伙后以取回财产为限担责。' },
+        ]},
+      { name:'第6章 公司法律制度', icon:'🏢',
+        points:[
+          { kw:'有限公司 vs 股份公司', tag:'基础',
+            life:'• 有限公司=小公司模式（1-50个股东）→ 适合几个朋友合伙开公司\n• 股份公司=大公司模式（股东人数不限）→ 适合想上市的公司\n就像：有限公司像私人小饭馆，股份公司像连锁餐饮集团。',
+            detail:'有限公司：股东1-50人，认缴制，无最低限额。股份公司：发起设立或募集设立（发起人认购≥35%）。' },
+          { kw:'董监高的忠实勤勉义务', tag:'必考',
+            life:'公司请的经理、董事就像"管家"：\n• 忠实义务=不能偷拿主人（公司）的东西，不能吃回扣，不能和自己做交易\n• 勤勉义务=要用心干活，不能整天摸鱼\n简单记：把公司当成别人家的钱，不能偷不能混',
+            detail:'忠实：不得受贿、侵占、挪用、擅自交易。勤勉：尽合理注意义务，违反造成损失须赔偿。' },
+          { kw:'股东代表诉讼 = "小股东替公司出头"', tag:'高频',
+            life:'公司总经理（老王）把公司钱吞了，但董事会不管。你作为小股东可以：\n①先书面要求监事会去告老王。\n②监事会不理你或者30天不动手→你可以自己以公司名义去告！\n条件：有限公司随便告；股份公司要持股超180天+1%以上。',
+            detail:'董事/高管侵权→请求监事会起诉。监事侵权→请求董事会。被拒绝/30日不起诉/紧急→股东可自己起诉。' },
+          { kw:'公司决议的三种瑕疵', tag:'易混',
+            life:'公司开股东会做了个决定：\n• 决议无效=决定违法（如"公司去贩毒"）→ 天生无效\n• 决议可撤销=程序有问题（如没通知你就开会了）→ 60天内可撤销\n• 决议不成立=根本就没开会、没投票、人没到齐→ 不存在这个决定',
+            detail:'无效（内容违法）。可撤销（程序违法/内容违章/表决违法），60日内。不成立（未开会/未表决/出席不足）。' },
+          { kw:'公司解散的五大原因', tag:'记忆',
+            life:'公司"死亡"的5种方式：\n① 到期了不想干了（经营期满）\n② 股东决定不干了（决议解散）\n③ 被人合并了（合并解散）\n④ 违法被吊销执照了\n⑤ 股东闹翻了，法院判解散（司法解散）',
+            detail:'①期限届满。②决议解散。③合并/分立。④吊销/关闭。⑤司法解散（严重困难+2年+10%以上股东请求）。' },
+        ]},
+      { name:'第7章 证券法律制度', icon:'📈',
+        points:[
+          { kw:'公开发行的认定', tag:'基础',
+            life:'就像你想卖股票筹钱：\n• 公开发行=向大街上不认识的人卖（不特定对象）OR 向超过200个朋友卖\n• 非公开发行=只向几个熟人卖（≤200人）\n公开发行要证监会注册审核，非公开发行相对简单。',
+            detail:'①向不特定对象发行。②向特定对象累计超200人。③以公开发行方式变相发行。注册制审核。' },
+          { kw:'内幕交易 = "提前知道消息炒股"', tag:'必考',
+            life:'你在公司当秘书，知道公司下周要被收购（股价会涨），赶紧自己买了股票→这就是内幕交易！\n红线：内幕信息知情人（董监高+大股东+中介）+未公开信息+买卖股票。\n记：知道机密别炒股，赚钱也要坐牢。',
+            detail:'内幕信息知情人+利用未公开信息买卖/泄露/建议买卖。内幕信息：对股价有重大影响的未公开信息。' },
+          { kw:'操纵市场的常见手法', tag:'重点',
+            life:'就像在菜市场搞鬼：\n• 连续交易=大户一直买买买，制造"这菜很抢手"的假象\n• 约定交易=两个人互相买卖，制造虚假交易量\n• 洗售=自己卖给自己（左手倒右手）\n• 蛊惑交易=发假消息骗人接盘',
+            detail:'连续交易+约定交易+洗售（自买自卖）+蛊惑交易+抢帽子交易（先买后推荐）。操纵市场可追究刑事责任。' },
+          { kw:'投资者保护的"核武器"', tag:'新规',
+            life:'保护小散（普通投资者）的3大法宝：\n① 代表人诉讼=你买了某垃圾股亏了，不用自己打官司，有"集体诉讼"帮你出头（默示加入）\n② 先行赔付=公司造假出事了，先赔你钱再去找公司算账\n③ 投服中心=有专门的保护机构帮你小股东说话',
+            detail:'代表人诉讼（默示加入+明示退出）+先行赔付+证券集体诉讼+投服中心持股行权+普通/专业投资者分类保护。' },
+          { kw:'上市公司要约收购', tag:'计算',
+            life:'你想收购一家公司，已经买了30%的股份了，还想继续买→必须向所有股东发出"收购要约"（公开说我要买你们的股票）。\n期限30-60天。如果买到75%以上→公司退市。\n价格不能低于前6个月你买的最贵价格。',
+            detail:'持股达30%继续收购→须发出全面或部分要约。期限30-60日。持股75%以上→退市。价格≥前6个月最高价。' },
+        ]},
+      { name:'第8章 企业破产法律制度', icon:'🏚️',
+        points:[
+          { kw:'破产原因 = "什么情况可以申请破产"', tag:'理解',
+            life:'开公司亏到哪种程度可以申请破产？\n①欠钱到期还不上+总资产小于总负债（资不抵债）\n②欠钱到期还不上+明显没钱还（连工资都发不出）\n③虽然现在还能撑，但"明显要不行了"（可申请重整）',
+            detail:'①不能清偿+资不抵债。②不能清偿+明显缺乏清偿能力。③明显丧失清偿能力可能（重整申请）。' },
+          { kw:'破产清偿顺序 = "破产了钱先给谁"', tag:'必考',
+            life:'公司破产了，清算出来的钱怎么分？就像分粥：\n第一碗：破产费用（打官司的花费+清算人的工资）\n第二碗：欠员工的工资+社保+补偿金\n第三碗：欠国家的税款\n第四碗：其他普通债主\n有抵押的债主：不参与排队，直接拿抵押物变现。',
+            detail:'①破产费用+共益债务。②职工工资+社保+补偿金。③税款。④普通债权。担保物权人别除权优先。' },
+          { kw:'破产撤销权 = "破产前偷偷转移财产"可撤销', tag:'重点',
+            life:'老王知道公司要破产了，偷偷把公司的车低价卖给他弟弟。法律说：这笔交易可以撤销！车的钱要追回来分给债主。\n可撤销的期限：破产受理前1年内干的这些事（低价转让/提前还债等）。\n破产受理前6个月内还了个别债主→也可撤销。',
+            detail:'受理前1年：无偿转让/低价/无担保加担保/提前清偿。受理前6个月：个别清偿（使财产受损）→可撤销。' },
+          { kw:'重整 vs 和解', tag:'对比',
+            life:'两者都是"破产的挽救措施"：\n• 重整=公司还有救！重新调整股权+债务。可以削股东的权利（减少股份）、延期还债。管用但对股东影响大。\n• 和解=只谈债务怎么还（分期还/打折还），不涉及股权。只有债务人（公司）能申请。\n简单记：重整=大手术（股东也得让路）；和解=小调理（只处理债务）。',
+            detail:'重整：债务人或债权人+出资额≥10%可申请，可调整股权，约束所有债权人。和解：仅债务人可申请，仅调整债务。' },
+        ]},
+      { name:'第9章 票据与支付结算', icon:'💳',
+        points:[
+          { kw:'票据的种类与特征', tag:'基础',
+            life:'三种票据像三种"钱的替代品"：\n① 汇票=你写个条子说"三个月后给张三1000块"（可延期）\n② 本票=银行开的"见票就给钱"的承诺书\n③ 支票=你现在写个条子让银行马上给钱（不能延期，10天内有效）\n特征：见票认字不认人（文义性）、拿到了就有效（无因性）',
+            detail:'汇票（银行+商业）、本票（银行）、支票（普通+现金+转账）。特征：文义性、无因性、要式性、流通性。' },
+          { kw:'票据抗辩限制 = "不能因为前手有问题就不给钱"', tag:'高频',
+            life:'老王开了一张汇票给老张，老张转给了你。现在到期了，你找老王要钱。老王说"老张骗了我，所以我不给你钱"→法律说：不行！你得给钱，你和老张之间的事另外算。\n除非你明知老王和老张有纠纷（你恶意），否则老王必须给你钱。',
+            detail:'票据债务人不得以与出票人/前手的抗辩事由对抗持票人（持票人明知除外）。保护票据流通性。' },
+          { kw:'支票的特别规定', tag:'实用',
+            life:'用支票要注意3件事：\n①金额可以空着先给别人（授权补记）\n②拿到支票后10天内必须去银行取钱（过期了银行可以不付）\n③账户里必须有钱！开空头支票违法→罚款+信用记录受损',
+            detail:'①不含收款人名称。②金额可补记。③提示付款期限10日（超期付款人可不付但出票人仍担责）。④禁止空头支票。' },
+          { kw:'票据伪造 vs 变造', tag:'易混',
+            life:'• 伪造=假签名（你冒充老王在票据上签字。老王不负责，你负刑事责任）\n• 变造=改金额（把100元改成10000元。在改之前签的名按原金额，改之后签名的按新金额）\n简单记：伪造=人不对；变造=数字不对。',
+            detail:'伪造：签章伪造（被伪造人不担责，伪造人承担刑/民事）。变造：更改签章以外内容（签章前→原内容；之后→变造内容）。' },
+        ]},
+      { name:'第10章 企业国有资产法律制度', icon:'🏛️',
+        points:[
+          { kw:'国家出资企业的四种类型', tag:'基础',
+            life:'国家当老板的4种方式：\n①国有独资企业=国家100%持有（老国企模式）\n②国有独资公司=国家100%持有（现代公司模式）\n③国有资本控股公司=国家持股>50%（国家说了算）\n④国有资本参股公司=国家持股<50%（国家只参与不分红）',
+            detail:'国有独资企业+国有独资公司+国有资本控股公司+国有资本参股公司。' },
+          { kw:'关联方交易的"高压线"', tag:'重点',
+            life:'公司高管的小舅子想和公司做生意→这就是关联交易。\n红线（绝对禁止）：国有独资企业/公司不能无偿给关联方资产、不能以不公平价格交易、不能和关联方一起投资。\n其他关联交易：要有正当程序（董事会/股东会批准、公平价格）。',
+            detail:'关联方：董监高+近亲属+其控制的企业。国有独资禁止无偿/不公平/共同出资。其他须履行决策程序。' },
+          { kw:'企业产权转让 = "卖国企股份的流程"', tag:'流程',
+            life:'国家想卖掉手里某国企的股份，必须走正规流程：\n①必须在产权交易所公开挂牌（不能私下找买家）\n②提前挂出来公示≥20个工作日\n③正式挂牌≥20个工作日\n④底价不能低于评估价\n⑤如果要降价超过10%→必须重新批准',
+            detail:'①公开进场交易。②预披露≥20工作日。③正式披露≥20工作日。④首次底价≥评估价。⑤降价≥10%须重新批准。' },
+        ]},
+      { name:'第11章 反垄断法律制度', icon:'🚫',
+        points:[
+          { kw:'垄断协议 = "串通定价"', tag:'核心',
+            life:'• 横向垄断协议=几家同行串通：他们说好一起涨价/一起减产/互相不抢客户。就像几家奶茶店说好"大家都卖25元/杯"\n• 纵向垄断协议=上游给下游定死价格：厂家说"你卖我的东西最低不能低于100元"',
+            detail:'横向（竞争者间）：固定价格+限产+分割市场+限制技术+联合抵制。纵向（上下游）：固定转售价+限定最低转售价。' },
+          { kw:'滥用市场支配地位 = "店大欺客"', tag:'必考',
+            life:'一家独大的公司欺负人：\n• 不公平高价（独家药卖天价）\n• 低于成本卖（挤死小商家再涨价）\n• 拒绝交易（不给你供货）\n• 搭售（想买热门商品必须搭配卖不出去的）\n• 差别待遇（对不同的客户给不同价格）',
+            detail:'不公平高价/低价+低于成本倾销+拒绝交易+限定交易+搭售+差别待遇。市场份额的认定：单方≥50%。' },
+          { kw:'经营者集中 = "合并需要申报"', tag:'重点',
+            life:'两家大公司要合并，如果营业额太大→必须向反垄断局申报。\n标准：全球合计营收>100亿+至少2家在中国营收>4亿；或中国合计营收>20亿+至少2家在中国营收>4亿。\n审查结果：批准/有条件批准/禁止。',
+            detail:'全球合计>100亿+至少2方中国>4亿。或中国合计>20亿+至少2方中国>4亿。审查30+90(+延长至150)日。' },
+          { kw:'行政垄断 = "政府搞地方保护"', tag:'特色',
+            life:'某市政府发文件说"全市机关单位只能买本地生产的办公用品"→这就是行政垄断。\n表现形式：\n• 指定只能买某家的\n• 不让外地商品进来\n• 不让外地企业投标\n• 强制企业搞垄断',
+            detail:'指定购买+限制外地商品+限制投标+强制垄断+制定排除竞争规定。反垄断法禁止行政机关滥用行政权力。' },
+        ]},
+      { name:'第12章 涉外经济法律制度', icon:'🌐',
+        points:[
+          { kw:'外商投资准入 = "负面清单管理"', tag:'核心',
+            life:'外国人来中国投资就像进一个俱乐部：\n• 负面清单=俱乐部里写了"这几间房不能进"（禁止投资行业）+ "这几间房要有会员才能进"（限制投资行业）\n• 清单以外的→外国人和中国人一样待遇（准入前国民待遇）\n• 还有国家安全审查（太敏感的不让进）',
+            detail:'准入前国民待遇+负面清单管理。清单以外内外资一致。安全审查制度。' },
+          { kw:'反倾销 = "外国货卖太便宜"', tag:'实用',
+            life:'某国把钢材以低于成本价卖到中国，中国的钢厂活不下去了。中国政府可以：\n①调查是否真的倾销（出口价<正常价值）\n②查是否对中国产业造成损害\n③成立→征收反倾销税（最高5年）',
+            detail:'倾销：出口价<正常价值。损害：实质损害/威胁/阻碍。反倾销税≤5年。价格承诺可替代。' },
+          { kw:'保障措施 = "进口突然暴增"', tag:'对比',
+            life:'和反倾销不同：\n保障措施不是针对某个国家搞鬼，而是"所有国家突然都往中国卖这个东西，国内企业受不了"。\n可以：提高关税+数量限制（针对所有国家，不分哪个国家）。\n临时保障措施≤200天。',
+            detail:'进口数量增加（绝对+相对）+严重损害+针对所有来源国（非歧视）。形式：提高关税+数量限制。' },
+        ]}
+    ]},
+  zl: {
+    name:'战略', icon:'🎯', color:'#e17055',
+    chapters:[
+      { name:'第1章 战略与战略管理概述', icon:'🗺️',
+        points:[
+          { kw:'公司战略 = "开公司的导航地图"', tag:'理解',
+            life:'就像你从北京开车去上海：需要先定目的地（愿景）、选走哪条高速（战略）、下哪个出口（策略）。\n战略解决三个问题：①去哪儿（目标）。②怎么去（路径）。③带什么去（资源）。',
+            detail:'公司战略是企业在竞争环境中为获得长期生存和发展而进行的总体性、长远性、基本性的谋划。包括战略目标+路径选择+资源配置。' },
+          { kw:'使命·愿景·目标 = "灵魂三问"', tag:'基础',
+            life:'• 使命=为什么开这家店（"让中国人喝上好咖啡"）\n• 愿景=想做成什么样（"成为亚洲第一的咖啡品牌"）\n• 战略目标=具体数字（"3年内开500家店，营收10亿" SMART原则）\n使命是初心，愿景是梦想，目标是KPI。',
+            detail:'使命（存在目的）→愿景（想成为什么）→战略目标（SMART：具体+可衡量+可达成+相关+有时限）。' },
+          { kw:'战略变革 = "公司转型"', tag:'理解',
+            life:'就像诺基亚从造纸→做手机→做电信设备，每次都是大转型。\n变革管理三步骤：\n①解冻=让大家意识到"不变不行了"（老路堵死了）\n②变革=开始行动（学新东西）\n③再冻结=新方法变成习惯',
+            detail:'①解冻（打破现状）。②变革（推动实施）。③再冻结（巩固新状态）。克服阻力：沟通+参与+支持+谈判+操纵+强制。' },
+          { kw:'战略的三个层次', tag:'框架',
+            life:'就像一个军队：\n• 公司层=总司令（决定打不打仗、去哪里打）\n• 业务层=前线将军（决定怎么打、用什么战术）\n• 职能层=后勤部门（搞补给、招兵、管钱）\n上层给方向，下层定方法。',
+            detail:'公司层战略（总体战略）→业务层战略（竞争战略）→职能层战略（研发/生产/营销/人力/财务）。' },
+        ]},
+      { name:'第2章 战略分析', icon:'🔍',
+        points:[
+          { kw:'PEST分析 = "看大环境"', tag:'工具',
+            life:'你想在学校门口开奶茶店，先观察四个方面：\nP（政治环境）：学校允许摆摊吗？城管管得严吗？\nE（经济环境）：学生零花钱多吗？附近有商圈吗？\nS（社会环境）：学生喜欢喝奶茶吗？流行趋势？\nT（技术环境）：怎么点单？用小程序吗？',
+            detail:'P（政治法律）+E（经济）+S（社会文化）+T（技术）。分析宏观环境对企业的影响。' },
+          { kw:'波特五力 = "奶茶店竞争分析"', tag:'必考',
+            life:'你在学校门口开奶茶店的5个竞争力量：\n① 新开的奶茶店（潜在进入者）：门槛低，明天就可能又开一家\n② 旁边卖果汁的（替代品）：不喝奶茶可以喝果汁\n③ 奶精供应商（供应商议价）：如果只有一家供货，你被拿捏\n④ 学生砍价（买方议价）：隔壁便宜2块你就没生意\n⑤ 对面那家奶茶店（现有竞争）：天天打价格战',
+            detail:'①潜在进入者（规模经济+转换成本+资金+渠道+政策）。②替代品（性价比+转换成本）。③供应商（集中度+替代性+重要性）。④买方。⑤现有竞争者（增长+集中度+差异化+退出壁垒）。' },
+          { kw:'SWOT分析 = "对自己做体检"', tag:'必考',
+            life:'就像你要追一个人，先分析自己：\nS（优势）= 你幽默、会照顾人\nW（劣势）= 你工资不高\nO（机会）= 对方刚失恋需要安慰\nT（威胁）= 情敌很有钱\n\n策略：\nSO→利用优势抓住机会（幽默安慰她）\nWO→补短板抓机会（先找个好工作）\nST→用优势应对威胁（用幽默打败情敌的金钱）\nWT→防守（先提升自己）',
+            detail:'S（优势）+W（劣势）=内部。O（机会）+T（威胁）=外部。SO增长↔WO扭转↔ST多种经营↔WT防御。' },
+          { kw:'波士顿矩阵 = "产品就像孩子"', tag:'经典',
+            life:'一个公司的不同产品就像"不同性格的孩子"：\n① 明星（学霸+受欢迎）：市场增长快+份额高→继续投资培养\n② 现金牛（学霸但低调）：市场增长慢+份额高→让它稳定赚钱\n③ 问题（偏科生但聪明）：市场增长快+份额低→选几个重点培养\n④ 瘦狗（学渣+没人理）：增长慢+份额低→放弃/卖掉',
+            detail:'明星（高增长+高份额）：投入。现金牛（低增长+高份额）：收割赚钱。问题（高增长+低份额）：选择性投入。瘦狗（低增长+低份额）：剥离/清算。' },
+          { kw:'价值链= "看公司哪些环节值钱"', tag:'工具',
+            life:'开一家奶茶店，哪些环节创造价值？\n基本活动：采购原料→制作奶茶→店铺运营→销售→售后服务\n支持活动：采购系统、研发新口味、招员工、财务管理系统、店长管理\n\n每个环节都可以省钱或做出特色，形成竞争优势。',
+            detail:'基本活动：内部物流+生产经营+外部物流+市场销售+服务。支持活动：采购+技术开发+人力资源管理+企业基础设施。' },
+          { kw:'VRIO框架 = "这资源值不值钱"', tag:'高频',
+            life:'看一个资源能不能成为你的核心竞争力，问四个问题：\nV（有价值吗？）→ 能赚钱吗？\nR（稀有吗？）→ 就你有还是别人也有？\nI（难模仿吗？）→ 别人能不能抄？\nO（组织得好吗？）→ 公司会用这个资源吗？\n\n要四个都"Yes"才是持久竞争优势。比如可口可乐的配方。',
+            detail:'V（有价值）+R（稀缺）+I（难模仿：历史条件/因果模糊/社会复杂）+O（被有效组织利用）→持久竞争优势。' },
+        ]},
+      { name:'第3章 战略选择', icon:'🎯',
+        points:[
+          { kw:'三种基本竞争战略 = "怎么打败对手"', tag:'核心',
+            life:'和同行竞争有三个"打法"：\n① 成本领先=打价格战（小米：同样配置更便宜）\n② 差异化=做不同（苹果：我就是不一样，贵但好用）\n③ 集中战略=打一个点（只做某个细分市场，比如只卖老年人手机）\n\n不能又想便宜又想高端（夹在中间最危险）。',
+            detail:'①成本领先（低成本+标准产品）：规模经济+经验曲线+简化+控制。②差异化（独特+溢价）：品牌+技术+服务+设计。③集中战略（聚焦细分市场）：成本集中/差异化集中。' },
+          { kw:'一体化战略 = "往前/往后/往旁边"', tag:'分类',
+            life:'你想开一家面包店，要扩大生意：\n• 前向一体化=自己开销售门店（原来只给超市供货，现在自己开店卖）\n• 后向一体化=自己种小麦（原来买面粉，现在自己生产面粉）\n• 横向一体化=把对面面包店买了（合并竞争对手）\n简单记：前向=靠近客户，后向=靠近原料，横向=吃掉同行。',
+            detail:'前向一体化（控制下游/渠道）+后向一体化（控制上游/供应商）+横向一体化（收购竞争对手）。' },
+          { kw:'安索夫矩阵 = "怎么增长"', tag:'工具',
+            life:'想赚钱增长，就两个维度组合：现有/新产品 × 现有/新市场\n① 市场渗透（老产品+老市场）：降价促销，让老顾客多买\n② 市场开发（老产品+新市场）：把面包卖到隔壁城市\n③ 产品开发（新产品+老市场）：推出新口味面包\n④ 多元化（新产品+新市场）：开个奶茶店（风险最大）',
+            detail:'①市场渗透。②市场开发。③产品开发。④多元化（相关/不相关）。风险递增。' },
+          { kw:'蓝海战略 = "别在红海里卷"', tag:'思维',
+            life:'• 红海=大家都在一个市场里抢得头破血流（比如共享单车大战）\n• 蓝海=创造没有竞争的新市场（比如任天堂Wii，不跟PS/Xbox拼画质，而是做体感游戏吸引家庭用户）\n核心：价值创新（不是技术多牛，而是在客户在意的地方做到极致）',
+            detail:'红海：现有市场空间竞争激烈。蓝海：创造新市场空间（价值创新）。六大原则：重建市场边界+关注全局+超越现有需求+合理顺序+克服障碍+融入战略。' },
+          { kw:'战略联盟 = "敌人的敌人是朋友"', tag:'实用',
+            life:'就像宝马和丰田合作研发氢能源汽车：\n• 单干太贵了，两家分担成本\n• 你有电池技术我有发动机技术，互补\n• 一起开拓新市场\n形式：合资公司/互相持股/签合作协议（研发/生产/营销/技术共享）',
+            detail:'动因：避免竞争+资源互补+开拓新市场+降低协调成本+快速获取技术。类型：合资+股权参与+契约式。' },
+        ]},
+      { name:'第4章 战略实施', icon:'🏃',
+        points:[
+          { kw:'组织结构的类型 = "公司的骨架"', tag:'理解',
+            life:'不同的公司用不同的"骨架"：\n• 创业型=小作坊（老板一个人说了算）\n• 职能型=按部门分（销售部+研发部+财务部...大公司常见）\n• 事业部型=按产品/地区分（华为分运营商业务+消费者业务+企业业务）\n• 矩阵型=一个员工两个老板（比如大项目制）',
+            detail:'创业型（直线制）+职能制+事业部制（区域/产品/客户）+矩阵制（双线汇报）+网络型（核心+外包）。' },
+          { kw:'平衡计分卡 = "不只盯着钱看"', tag:'必考',
+            life:'评价一个公司好不好，不能只看赚多少钱（财务）。还要看：\n① 财务维度=赚了多少？成本降了吗？\n② 客户维度=顾客满意吗？回头客多吗？\n③ 内部流程维度=效率高吗？质量好吗？\n④ 学习成长维度=员工在进步吗？系统在升级吗？\n就像评价一辆车：不能只看速度，还要看安全、油耗、舒适度。',
+            detail:'①财务（ROI+营收+利润+现金流）。②客户（满意度+留存+份额+获客）。③内部流程（质量+效率+创新+售后）。④学习成长（员工+系统+文化）。' },
+          { kw:'战略控制方法', tag:'工具',
+            life:'怎么确保战略在落地？用4个工具：\n① 预算控制=看钱花得对不对\n② 平衡计分卡=看四个维度是否均衡\n③ 标杆分析=跟行业最牛的比（学华为/学海底捞）\n④ KPI=关键指标（比如"准时交付率≥98%"）',
+            detail:'预算控制（增量/零基/滚动/作业）+平衡计分卡+标杆分析+KPI。' },
+          { kw:'企业文化的四种类型', tag:'对比',
+            life:'不同的公司有不同"性格"：\n① 权力型=老板说了算（创业公司常见）\n② 角色型=按规矩办事、官僚（国企/大机构）\n③ 任务型=项目导向、结果说话（咨询公司/广告公司）\n④ 人员型=牛人文化、自由（互联网公司/研究所）',
+            detail:'权力导向（集权）+角色导向（规章+官僚）+任务导向（项目+团队）+人员导向（个人+自治）。' },
+        ]},
+      { name:'第5章 公司治理', icon:'👥',
+        points:[
+          { kw:'公司治理 = "怎么管好管人的人"', tag:'理解',
+            life:'公司就像一个"委托游戏"：股东（老板）出钱请经理（管家）来管公司。但管家可能会偷懒、乱花钱、给自己发高工资。\n公司治理就是设计一套制度：\n① 董事会监督经理\n② 监事会再监督董事会\n③ 审计查账\n④ 信息公开让大家都知道',
+            detail:'协调股东、董事会、管理层及其他利益相关者的制度安排。核心：解决委托代理问题（所有权与经营权分离）。' },
+          { kw:'独立董事 = "站在局外的裁判"', tag:'重点',
+            life:'公司董事会里要有几个"不拿工资、不是自己人"的外部专家，这就是独立董事。\n他们像裁判：不偏袒大股东，不偏袒管理层。\n要求：不在公司任职（除了当董事）、不是大股东、不跟公司有生意往来、不是高管亲戚。\n他们主要在审计委员会、薪酬委员会说话。',
+            detail:'①不在公司任职（除董事外）。②不是主要股东。③无重大业务关联。④非董监高亲属。⑤任职≤6年。⑥审计/薪酬/提名委员会占多数。' },
+          { kw:'代理问题的三种类型', tag:'高频',
+            life:'在公司里，有3种"不听话"的情况：\n① 经理不听话（第一类代理问题）：CEO给自己发巨额奖金、买私人飞机不用心干活\n② 大股东欺负小股东（第二类代理问题）：大股东把公司钱借给亲戚公司、低价卖资产给自己\n③ 公司坑银行（第三类代理问题）：借了钱去高风险投资，亏了银行倒霉',
+            detail:'①股东vs管理层（懈怠+奢侈+过度投资）。②大股东vs小股东（隧道效应+关联交易）。③股东vs债权人（过度冒险）。' },
+          { kw:'ESG = "好公司的三个标准"', tag:'趋势',
+            life:'现在评判好公司不只是看赚多少钱：\nE（环境）：环保吗？碳中和了吗？污染处理好了吗？\nS（社会）：对员工好吗？做公益吗？产品安全吗？\nG（治理）：董事会规范吗？财务透明吗？有腐败吗？\nESG好的公司，长期来看更值钱、更抗跌。',
+            detail:'E（碳排放+环保+资源）+S（员工+社区+人权+产品）+G（董事会+股权+反腐+信息披露）。ESG好的公司治理水平更高。' },
+        ]},
+      { name:'第6章 风险与风险管理', icon:'🛡️',
+        points:[
+          { kw:'企业风险的分类 = "公司怕什么"', tag:'理解',
+            life:'开公司可能遇到哪些"倒霉事"？\n① 外部风险：政策变了（教培行业说没就没）、市场变了（疫情没人逛街）、天灾人祸（洪水淹了仓库）\n② 内部风险：决策错了（盲目扩张）、运营出问题（产品不合格）、财务造假（暴雷）、违法被罚',
+            detail:'外部：政治+法律+市场+社会+技术+自然。内部：战略+运营+财务+合规。全面风控框架下五大类：战略+财务+运营+市场+法律。' },
+          { kw:'风险管理流程 = "怎么防风险"', tag:'流程',
+            life:'就像你出门前：\n① 识别=看天气预报说可能要下雨（发现风险）\n② 评估=雨大吗？要下多久？（概率+影响）\n③ 应对=带伞/不出门/打车/淋着（风险应对4种方式）\n④ 监控=时不时看窗外（持续观察）',
+            detail:'①风险识别（识别+分类）。②风险评估（定性+定量+概率+影响）。③风险应对（规避+降低+转移+承受）。④风险监控（持续+预警+报告）。' },
+          { kw:'风险应对的四种策略 = "下雨天怎么办"', tag:'核心',
+            life:'遇到下雨天，你有4种选择：\n① 风险规避=干脆不出门（不干这生意了）\n② 风险降低=带伞穿雨衣（装灭火器、做培训）\n③ 风险转移=打车（买保险、外包给专业公司）\n④ 风险承受=淋着走（小风险不在乎，自己担了）',
+            detail:'①规避（退出/不参与）。②降低（控制措施+分散）。③转移（保险+担保+外包+套期）。④承受（接受+自保）。⑤对冲（组合+对冲工具）。' },
+          { kw:'COSO内部控制 = "公司的防错机制"', tag:'必考',
+            life:'就像飞机要有多个备用系统防止出事：\n① 控制环境=公司的"风气"（领导重视安全吗？）\n② 风险评估=知道哪里容易出问题\n③ 控制活动=具体防错措施（双人签字、审批流程）\n④ 信息沟通=问题能及时传达到领导\n⑤ 内部监督=定期检查防错系统好不好使\n\n用途：保证经营有效、财报真实、合规。',
+            detail:'五要素：控制环境+风险评估+控制活动+信息与沟通+内部监督。目标：经营+报告+合规。局限：人为错误+共谋+管理层凌驾。' },
+          { kw:'黑天鹅 vs 灰犀牛', tag:'形象',
+            life:'• 黑天鹅=没想到的灾难（就像疫情，谁也没想到会来、影响这么大）\n• 灰犀牛=明摆着的危险但大家装没看见（就像房价泡沫，大家都知道早晚要爆但没人管）\n\n管理启示：黑天鹅靠弹性（抗打击能力），灰犀牛要提前行动（别装睡）。',
+            detail:'黑天鹅：罕见+影响巨大+事后可解释（不可预测）。灰犀牛：大概率+影响大+明显但被忽视（可预见）。兼顾两者。' },
+        ]}
+    ]}
+};
+
+const EXAMS = {
+  jjf: [
+    { q:'根据法律规范的性质，下列选项中属于强行性规范的是？', opts:['A. 民事主体可以自行约定合同内容','B. 买卖合同中出卖人应交付标的物','C. 当事人可以协议变更合同条款','D. 自然人享有姓名权，可以自主决定变更姓名'], ans:1, explain:'强行性规范是不允许当事人自行约定的，必须遵守。B选项"出卖人应交付标的物"是法律强制要求，不能约定免除。A/C/D都是当事人可以自由约定的任意性规范。', life:'就像学校规定"必须穿校服"是强制性的，不能商量；而"可以选择参加哪个社团"是任意性的，可以自己决定。' },
+    { q:'下列关于法律关系主体的表述中，正确的是？', opts:['A. 非法人组织不能独立承担民事责任','B. 国家在任何情况下都不能成为法律关系主体','C. 法人的民事权利能力与民事行为能力同时产生','D. 自然人的民事权利能力始于出生，终于死亡，但胎儿不具有民事权利能力'], ans:2, explain:'法人的权利能力和行为能力同时产生、同时消灭（选项C正确）。A错误：非法人组织可独立承担民事责任但出资人承担无限责任。B错误：国家是特殊主体（如发行国债）。D错误：民法典规定胎儿在涉及遗产继承、接受赠与等时视为具有民事权利能力。', life:'法人就像一个"虚拟人"，一出生（注册成立）就能做事（签合同），死了（注销）就啥也不能干了。胎儿只在继承遗产等特殊情况才被"当作已经有了"权利能力。' },
+    { q:'根据民法典，下列关于诉讼时效的表述中，正确的是？', opts:['A. 诉讼时效期间届满后，债务人可以主张诉讼时效抗辩','B. 诉讼时效中断的事由消除后，诉讼时效期间重新计算6个月','C. 支付存款本金及利息请求权适用诉讼时效','D. 无民事行为能力人对其法定代理人的请求权的诉讼时效，自知道权利受损之日起计算'], ans:0, explain:'A正确：时效届满后，债务人取得抗辩权，可以主张不履行债务。B错误：中断后重新计算（不是6个月）。C错误：支付存款本息不适用诉讼时效。D错误：无民事行为能力人对法定代理人的请求权，自法定代理终止之日起计算。', life:'诉讼时效就像超市的"7天退换货"政策——过了7天，商家可以说"我不给退了"。但存银行的钱（存款本息）永远可以要回来，不适用这个规则。' },
+    { q:'根据物权法律制度，下列属于动产所有权善意取得构成要件的有？', opts:['A. 受让人受让该动产时是善意的','B. 以合理的价格转让','C. 转让的动产已经交付给受让人','D. 转让人对转让的动产享有所有权'], ans:'ABC', explain:'D错误：善意取得的前提恰恰是转让人无处分权（即不享有所有权）。ABC是善意取得的三个核心要件：善意+合理价格+交付。如果转让人有所有权，那就是正常的买卖，不需要善意取得制度。', life:'就像你室友偷了别人的电脑拿去卖给你，你不知情（善意）、花了正常价（合理价格）、拿到了电脑（交付）→法律保护你，电脑归你。但室友如果本来就是电脑主人，那就正常买卖，不需要"善意取得"来保护。' },
+    { q:'甲将房屋抵押给乙，办理了抵押登记。后甲将该房屋出租给丙，租期3年。关于该抵押权的实现，下列表述中正确的是？', opts:['A. 抵押权实现后，租赁合同对受让人继续有效','B. 抵押权实现后，租赁合同对受让人不具有约束力','C. 乙的抵押权效力不及于该房屋的租金','D. 甲将房屋出租须经乙同意'], ans:0, explain:'A正确：先抵押后出租且已登记的，租赁合同对受让人有约束力（"抵押不破租赁"）。B错误：若先租后抵，租赁更优先；先抵后租，已登记的也不破租赁。C错误：抵押权效力及于租金（物上代位性）。D错误：抵押人不需要抵押权人同意即可出租。', life:'就像你先把房子抵押给银行借钱，然后又租给别人住。银行收房子的时候，租客可以继续住到租期结束（"抵押不破租赁"）。这就是为啥买房前要查清楚有没有租客，否则买到也住不进去。' },
+    { q:'根据合同法律制度，下列关于定金的表述中正确的有？', opts:['A. 定金合同自实际交付定金时成立','B. 定金的数额不得超过主合同标的额的20%','C. 给付定金的一方不履行债务，无权请求返还定金','D. 实际交付的定金数额多于约定数额的，视为变更约定的定金数额'], ans:'ABCD', explain:'四个选项都对。A：定金合同是实践合同（交了才成立）。B：≤20%，超部分无效（不产生定金效力）。C：给付方违约→无权收回。D：实际多交了按实际算。注意：收受方违约要双倍返还。', life:'你看中一件500元的衣服，给了老板100元定金：①如果你反悔→100元不退。②老板反悔→退你200元。③定金最多不能超过100元（500×20%）。④如果你给了120元→也按120元算定金。' },
+    { q:'根据合伙企业法律制度，下列关于有限合伙企业的表述中正确的是？', opts:['A. 有限合伙企业由普通合伙人和有限合伙人组成','B. 有限合伙人可以劳务出资','C. 有限合伙人可以执行合伙事务','D. 有限合伙人不得自营或者同他人合作经营与本有限合伙企业相竞争的业务'], ans:0, explain:'A正确：有限合伙=至少1个普通合伙人+至少1个有限合伙人。B错误：有限合伙人不能以劳务出资（普通合伙人可以）。C错误：有限合伙人不得执行合伙事务。D错误：有限合伙人可以经营竞争业务（不受竞业禁止限制）。', life:'有限合伙人就像"只出钱不说话"的投资人：可以干自己的生意（包括跟公司竞争），但不能插手公司管理。只有普通合伙人才能用"技术、人脉"（劳务）来当出资。' },
+    { q:'根据公司法律制度，下列人员中，不得担任公司董事、监事、高级管理人员的有？', opts:['A. 因贪污被判刑，执行期满未逾5年','B. 担任破产清算公司的董事且负有个人责任，自该公司破产清算完结之日起未逾3年','C. 个人所负数额较大的债务到期未清偿','D. 限制民事行为能力人'], ans:'ABCD', explain:'四个选项都是法定的禁止情形。A：刑罚执行期满未逾5年（经济犯罪）。B：破产清算完结未逾3年且负个人责任。C：大额债务到期未清偿（个人征信差）。D：限制民事行为能力或无民事行为能力人不得担任。', life:'开公司的"高管"不是谁都能当的：①坐过牢的（经济犯罪）要等5年。②把公司干破产的责任人要等3年。③欠一屁股债不还的不行。④没长大（限制民事行为能力）的不行。' },
+    { q:'根据证券法律制度，下列属于内幕信息的有？', opts:['A. 公司分配股利或者增资的计划','B. 公司股权结构的重大变化','C. 公司债务担保的重大变更','D. 公司营业用主要资产的抵押、出售或者报废一次超过该资产的30%'], ans:'ABCD', explain:'四个选项都是法定的内幕信息。内幕信息=对上市公司股票交易价格可能有较大影响的、尚未公开的信息。还包括：公司重大投资行为、订立重要合同、经营方针重大变化、董事长/总经理变动等。', life:'你在上市公司当秘书，知道公司马上要分红了（还没公告），赶紧买股票→内幕交易！知道机密的时候别炒股，等公告了再说。' },
+    { q:'根据企业破产法律制度，下列各项中属于破产费用的有？', opts:['A. 破产案件的诉讼费用','B. 管理、变价和分配债务人财产的费用','C. 管理人执行职务的费用、报酬','D. 为债务人继续营业而应支付的劳动报酬'], ans:'ABC', explain:'ABC是破产费用（为了破产程序的运转花的钱）。D是共益债务（为了让公司继续运转花的钱）。两者在清偿顺序上破产费用优先于共益债务。区别：破产费用=处理破产这件事本身的花费；共益债务=破产期间继续经营的花费。', life:'破产费用就像"办丧事"的花费（诉讼费、清算人的工资等）。共益债务就像"病人在抢救期间"的花费（继续营业的工资、水电费等）。办丧事的钱要先出，再出抢救的钱。' },
+    { q:'甲公司将一张银行承兑汇票背书转让给乙公司，乙公司又背书转让给丙公司。丙公司向银行提示付款时，银行以甲公司欠其货款为由拒绝付款。根据票据法律制度，下列关于丙公司行使票据权利的表述中正确的是？', opts:['A. 丙公司只能向甲公司行使追索权','B. 丙公司可以向乙公司行使追索权','C. 丙公司可以向银行行使追索权','D. 丙公司可以向甲、乙、银行中的任意一方行使追索权'], ans:3, explain:'D正确：持票人丙可以向出票人（甲）、前手（乙）、承兑人（银行）中的任意一方行使追索权。票据追索权具有选择性（可任选追索对象）、变更性（可换人追索）、代位性（追到后可继续向前手追）。银行作为承兑人是主债务人，不能以与出票人之间的抗辩事由对抗持票人。', life:'就像你拿到了一张借条，谁在上面签了字你都可以找他要钱。银行既然承兑了（承诺付款），就不能说"因为甲公司欠我钱所以不给你"，银行和甲公司的纠纷跟拿票据的丙没关系。' },
+    { q:'根据反垄断法律制度，下列属于横向垄断协议的有？', opts:['A. 固定或者变更商品价格','B. 限制商品的生产数量或者销售数量','C. 分割销售市场或者原材料采购市场','D. 联合抵制交易'], ans:'ABCD', explain:'横向垄断协议=同行之间串通。ABCD都是典型的横向垄断形式。此外还包括：限制购买新技术/新设备、限制开发新技术/新产品。纵向垄断协议（上下游之间）主要是固定转售价格和限定最低转售价格。', life:'几家奶茶店老板坐在一起说好"大家都卖25元/杯"→横向垄断！或者"你卖东边，我卖西边，不抢对方客户"→也是横向垄断！同行之间不能串通，各凭本事竞争。' },
+    { q:'根据涉外经济法律制度，下列关于外商投资管理的表述中正确的是？', opts:['A. 外商投资实行准入前国民待遇加负面清单管理制度','B. 负面清单以外的领域，按照内外资一致的原则实施管理','C. 外国投资者不得投资负面清单禁止投资的领域','D. 外商投资安全审查制度属于准入后管理措施'], ans:'ABC', explain:'ABC正确。D错误：安全审查制度属于准入前管理措施（不是准入后），是在投资进入前就要审查的。负面清单分为禁止类和限制类，禁止类不能投，限制类要符合条件才能投。', life:'外国人来中国投资就像进一个"会员制俱乐部"：门口贴了张纸（负面清单），上面写的"这几间房不能进"（禁止投资）、"这几间要有会员卡才能进"（限制投资）。其他的房间随便进，跟中国人一样待遇。' },
+  ],
+  zl: [
+    { q:'下列各项中，属于PEST分析中政治法律环境因素的有？', opts:['A. 国家的产业政策','B. 税收政策','C. 环境保护立法','D. 贸易政策'], ans:'ABCD', explain:'PEST的P（Political）包括：政治制度、方针政策（产业政策、税收政策、贸易政策）、法律法规（环保法、劳动法等）、政府行为等。四个选项都属于政治法律环境因素。', life:'你想在学校门口开奶茶店，P=看学校让不让摆摊、城管管不管、有没有食品安全规定。这些都是"政治法律环境"，不是你说了算的，得先了解清楚。' },
+    { q:'根据波特五力模型，下列各项中，影响行业进入壁垒的因素有？', opts:['A. 规模经济','B. 转换成本','C. 产品差异化','D. 政府政策'], ans:'ABCD', explain:'进入壁垒=新人想进来有多难。ABCD四个都是提高进入壁垒的因素。此外还有：资本需求、与规模无关的成本劣势（如专利技术、地理优势、学习曲线）、分销渠道、预期报复等。', life:'你在小区门口开了家奶茶店，别人想跟风开店：如果开奶茶店要投100万（资本需求高）、要有独家配方（产品差异化）、要办食品许可证（政府政策）→别人就不容易进来，你的生意就好做。' },
+    { q:'甲公司是国内一家大型家电企业，在冰箱、空调、洗衣机等产品的市场份额均位居行业前列。近年来，该公司开始涉足智能手机、智能家居等新领域。根据波士顿矩阵，下列表述中正确的有？', opts:['A. 冰箱业务属于现金牛业务','B. 智能手机业务属于明星业务','C. 智能家居业务属于问题业务','D. 洗衣机业务属于瘦狗业务'], ans:'AC', explain:'A正确：冰箱市场成熟（低增长）+甲份额高→现金牛（提供现金流）。C正确：智能家居是新领域（高增长）+甲刚进入（低份额→问题业务），需要大量资金投入但前途未卜。B错误：智能手机是否明星要看数据，题干未说明。D错误：洗衣机同冰箱一样，很可能是现金牛而非瘦狗。', life:'就像你养了四个"孩子"：冰箱业务=学霸但低调（现金牛，稳定赚钱）。智能手机=如果做得好是学霸受宠（明星），做得不好就是偏科生（问题）。智能家居=偏科生（问题业务），要不要继续培养得想清楚。' },
+    { q:'根据SWOT分析原理，下列适合采用增长型战略（SO战略）的情况是？', opts:['A. 企业外部有机会，内部有优势','B. 企业外部有机会，内部有劣势','C. 企业外部有威胁，内部有优势','D. 企业外部有威胁，内部有劣势'], ans:0, explain:'SO=Strengths+Opportunities，用优势去抓住机会，适合增长型战略。WO=利用机会、弥补劣势（扭转战略）。ST=用优势应对威胁（多种经营战略）。WT=减少劣势、回避威胁（防御战略）。', life:'你擅长做饭（优势）+ 学校门口刚好缺一家好吃的餐馆（机会）→赶紧开一家！这就是SO增长战略。如果你不会做饭（劣势）+ 大家需要餐馆（机会）→先去学厨艺（WO扭转战略）。' },
+    { q:'下列各项中，属于成本领先战略的实施条件（资源和能力）的有？', opts:['A. 实现规模经济','B. 降低各种要素成本','C. 提高生产率','D. 改进产品工艺设计'], ans:'ABCD', explain:'成本领先战略的资源和能力包括：①规模经济降低单位成本。②要素成本控制（原料、人工等）。③提高生产率（流程优化、自动化）。④改进产品设计（简化功能、减少用料）。⑤利用学习曲线效应。⑥与供应商建立良好关系。⑦纵向整合。', life:'你想做"最便宜的奶茶"（成本领先）：①一次买很多杯子（规模经济）→每个杯子的单价更便宜。②用性价比更高的原料（降低要素成本）。③优化流程，一个人能同时做4杯（提高生产率）。④简化包装不用花里胡哨的（改进设计）。' },
+    { q:'根据战略钟模型，下列各项中属于失败战略的是？', opts:['A. 低价低值','B. 低价','C. 高值','D. 高价低值'], ans:3, explain:'战略钟有8种定位：①低价低值（集中成本领先）。②低价（成本领先）。③混合（物美价廉）。④高值（差异化）。⑤高价高值（集中差异化）。⑥高价标准值（失败）。⑦低价标准值（失败）。⑧高价低值（失败）。D选项高价低值=贵且质量差，肯定失败。', life:'一家饭店的菜又贵又难吃（高价低值）→肯定没人来，倒闭。一家饭店菜便宜但很难吃（低价低值）→适合学生但长久也不行。最理想的是"物美价廉"（混合战略），或者"东西确实好、贵点也值得"（高值差异化）。' },
+    { q:'下列关于平衡计分卡四个维度的表述中正确的有？', opts:['A. 财务维度包括营业收入、投资回报率等指标','B. 客户维度包括客户满意度、市场份额等指标','C. 内部流程维度可以反映企业的创新能力','D. 学习与成长维度包括员工满意度、信息系统能力等指标'], ans:'ABCD', explain:'四个维度及典型指标：\n财务：ROI、营收、利润、现金流、成本降低\n客户：满意度、留存率、市场份额、获客率\n内部流程：质量（次品率）、效率（周转率）、创新（研发周期）、售后\n学习成长：员工技能/满意度、信息系统、组织文化', life:'评价一个公司好不好，不能只看赚了多少钱。就像评价一辆车：不能只看速度（财务），还要看安全（客户满意度）、油耗（效率）、坐着舒服不舒服（员工满意度）。' },
+    { q:'根据公司治理理论，下列属于第一类代理问题（股东与管理层之间的代理问题）表现形式的有？', opts:['A. 经理人过度在职消费','B. 经理人盲目扩张企业规模','C. 经理人偷懒懈怠','D. 大股东通过关联交易侵占公司利益'], ans:'ABC', explain:'ABC是第一类代理问题（管理层损害股东利益）。D是第二类代理问题（大股东损害小股东利益）。第一类代理问题的核心：管理层拿着股东的"钱"但不把股东的钱当自己的钱，表现为奢侈消费、过度投资建"帝国"、偷懒等。', life:'你是饭店老板（股东），请了个店长（经理）来管店。店长：①天天请朋友来免费吃饭（过度在职消费）。②非要开分店但其实不需要（盲目扩张）。③天天摸鱼玩手机（偷懒）。→这些都是第一类代理问题。如果大股东把饭店的钱借给自己亲戚（第二类），那是欺负小股东。' },
+    { q:'下列各项中，属于企业风险管理中"风险转移"应对策略的有？', opts:['A. 购买保险','B. 将部分业务外包给专业公司','C. 通过期货合约进行套期保值','D. 与供应商签订长期固定价格合同'], ans:'ABC', explain:'ABC属于风险转移。A：保险是最典型的风险转移（把风险转给保险公司）。B：外包（把风险转给外包方）。C：套期保值（把价格波动风险转给期货市场）。D是风险降低（不是转移，签固定价格合同只是锁定了价格，风险并未转移给第三方）。', life:'下雨天出门怕淋湿，你有4种办法：①不出门（规避）。②带伞（降低）。③打车（转移→把淋雨的风险转给司机/出租车公司）。④淋着走（承受）。买保险、外包、做期货都是"转移"——让别人帮你扛风险。' },
+    { q:'根据COSO内部控制框架，下列各项中属于控制环境要素的有？', opts:['A. 董事会对内部控制的重视程度','B. 企业的诚信和道德价值观','C. 企业的组织结构','D. 人力资源政策'], ans:'ABCD', explain:'控制环境是内部控制的"基础"，包括：①诚信和道德价值观。②董事会（对内部控制的态度和重视程度）。③管理层的经营理念和风格。④组织结构（权责分配）。⑤人力资源政策（招聘、培训、考核）。⑥反舞弊机制。控制环境决定了公司"从上到下对规矩的重视程度"。', life:'控制环境就像一支部队的"军纪"：①领导重不重视纪律（董事会的态度）。②士兵有没有荣誉感（诚信价值观）。③部队怎么编的（组织架构）。④怎么招兵（人力资源）。如果军纪好（控制环境好），下面的制度才能执行到位。' },
+    { q:'甲公司是一家服装制造企业，近年来国际市场上棉花价格大幅波动。甲公司通过购买棉花期货合约来管理原材料价格波动风险。根据风险类型，甲公司采取的风险管理策略属于？', opts:['A. 风险规避','B. 风险降低','C. 风险转移','D. 风险承受'], ans:2, explain:'C正确。通过期货套期保值，将棉花价格波动的风险转移给了期货市场的对手方（投机者）。注意区分：风险转移不是消除风险，而是把风险"转出去"。购买期货合约实质上是把价格风险转移了。A规避是不做这生意了；B降低是控制措施；D承受是认了不管。', life:'你是做T恤的，担心棉花价格大涨。于是你去期货市场"打个赌"：如果棉花涨了，你的期货赚钱补贴买棉花的损失→这叫套期保值。你等于把"棉花涨价的风险"转给了跟你对赌的人（风险转移）。' },
+  ]
+};
+
+const S = {
+  sub: 'jjf',
+  memo: JSON.parse(localStorage.getItem('cpa_memo')||'{}'),
+  star: JSON.parse(localStorage.getItem('cpa_star')||'{}'),
+  weak: JSON.parse(localStorage.getItem('cpa_weak')||'{}'),
+  dark: localStorage.getItem('cpa_dark')==='true',
+  page: 'main',
+  fq: [], fi: 0
+};
+
+function save(){
+  localStorage.setItem('cpa_memo',JSON.stringify(S.memo));
+  localStorage.setItem('cpa_star',JSON.stringify(S.star));
+  localStorage.setItem('cpa_weak',JSON.stringify(S.weak));
+  localStorage.setItem('cpa_dark',S.dark);
+}
+function k(s,ci,pi){return s+'-'+ci+'-'+pi}
+function allPts(s){
+  let r=[];
+  (s==='mixed'?['jjf','zl']:[s]).forEach(sub=>{
+    DATA[sub].chapters.forEach((ch,ci)=>{
+      ch.points.forEach((p,pi)=>r.push({...p,sub,ci,pi,key:k(sub,ci,pi),chName:ch.name,subName:DATA[sub].name}));
+    });
+  });
+  return r;
+}
+function count(sub){let p=allPts(sub);return{p:Object.keys(S.memo).filter(x=>S.memo[x]&&x.startsWith(sub)).length,t:p.length}}
+
+function render(){
+  const sub=S.sub;
+  const wrap=document.getElementById('mainWrap');
+  let html='';
+  const pts=allPts(sub);
+  const memCount=pts.filter(p=>S.memo[p.key]).length;
+  document.getElementById('statRow').innerHTML=
+    `<span>📝 ${pts.length} 考点</span><span>✅ 已掌握 ${memCount}/${pts.length}</span><span>⭐ ${pts.filter(p=>S.star[p.key]).length} 收藏</span>`;
+
+  const subjects=sub==='mixed'?['jjf','zl']:[sub];
+  subjects.forEach(s=>{
+    const d=DATA[s];
+    d.chapters.forEach((ch,ci)=>{
+      let mc=0,st=0,wk=0;
+      ch.points.forEach((_,pi)=>{
+        const kk=k(s,ci,pi);
+        if(S.memo[kk])mc++;
+        if(S.star[kk])st++;
+        if(S.weak[kk])wk++;
+      });
+      const total=ch.points.length;
+      const pct=total?Math.round(mc/total*100):0;
+      const colors=['#6c5ce7','#e17055','#0984e3','#00b894','#fdcb6e','#fd79a8'];
+      const ci2=subjects.indexOf(s)*d.chapters.length+ci;
+      html+=`<div class="mind">
+        <div class="mind-hd" onclick="togMind(this)">
+          <div class="ico" style="background:${colors[ci2%6]}22">${ch.icon||'📌'}</div>
+          <div class="info">
+            <div class="nm">${ch.name}</div>
+            <div class="sub">${s==='jjf'?'📜经济法':'🎯战略'} · ✅${mc}/${total} ⭐${st} 🔴${wk}</div>
+          </div>
+          <div class="bar-wrap"><div class="bar-fill" style="width:${pct}%"></div></div>
+          <div class="arr">▼</div>
+        </div>
+        <div class="mind-bd">`;
+
+      ch.points.forEach((p,pi)=>{
+        const kk=k(s,ci,pi);
+        const memo=S.memo[kk],star=S.star[kk],weak=S.weak[kk];
+        html+=`<div class="knot${memo?' memo':''}${star?' starred':''}${weak?' weak':''}" onclick="toggleKnot(this)">
+          <div class="kw">${p.kw} <span class="tag">${p.tag||''}</span></div>
+          <div class="life"><div class="lb">💡 生活化理解</div>${(p.life||'').replace(/\n/g,'<br>')}</div>
+          <div class="detail">${(p.detail||'').replace(/\n/g,'<br>')}</div>
+          <div class="foot">
+            <span class="btn mem${memo?' on':''}" onclick="evStop(event);tog('memo','${kk}',this)">${memo?'✅已会':'○标记'}</span>
+            <span class="btn star${star?' on':''}" onclick="evStop(event);tog('star','${kk}',this)">${star?'⭐':'☆收藏'}</span>
+            <span class="btn weak${weak?' on':''}" onclick="evStop(event);tog('weak','${kk}',this)">${weak?'🔴弱':'○弱'}</span>
+          </div>
+        </div>`;
+      });
+
+      html+=`</div></div>`;
+    });
+  });
+
+  wrap.innerHTML=html;
+  const c=count('jjf');document.getElementById('jjfCt').textContent=c.p+'/'+c.t;
+  const c2=count('zl');document.getElementById('zlCt').textContent=c2.p+'/'+c2.t;
+}
+
+function togMind(el){
+  const bd=el.nextElementSibling;
+  bd.classList.toggle('open');
+  el.querySelector('.arr').classList.toggle('open');
+}
+function toggleKnot(el){
+  const life=el.querySelector('.life');
+  const detail=el.querySelector('.detail');
+  life.classList.toggle('show');
+  detail.classList.toggle('show');
+}
+function evStop(e){e.stopPropagation()}
+
+function tog(what,key,el){
+  if(what==='memo')S.memo[key]=!S.memo[key];
+  else if(what==='star')S.star[key]=!S.star[key];
+  else if(what==='weak')S.weak[key]=!S.weak[key];
+  save();
+  const kk=el.closest('.knot');
+  if(what==='memo'){kk.classList.toggle('memo');el.textContent=S.memo[key]?'✅已会':'○标记';el.classList.toggle('on')}
+  else if(what==='star'){kk.classList.toggle('starred');el.textContent=S.star[key]?'⭐':'☆收藏';el.classList.toggle('on')}
+  else if(what==='weak'){kk.classList.toggle('weak');el.textContent=S.weak[key]?'🔴弱':'○弱';el.classList.toggle('on')}
+  render();
+  document.querySelectorAll('.sub-bar div').forEach(d=>d.classList.remove('active'));
+  const st=S.sub==='mixed'?'mixed':S.sub;
+  document.querySelector(`.sub-bar div[data-s="${st}"]`).classList.add('active');
+}
+
+// subject tabs
+document.querySelectorAll('.sub-bar div').forEach(el=>{
+  el.addEventListener('click',function(){
+    document.querySelectorAll('.sub-bar div').forEach(d=>d.classList.remove('active'));
+    this.classList.add('active');
+    S.sub=this.dataset.s;
+    document.getElementById('searchInp').value='';
+    if(S.sub==='exam'){showExamPage();return}
+    if(S.sub==='mashup'){showMashupPage();return}
+    if(S.sub==='fw'){showFrameworkPage();return}
+    showMainPage();
+  });
+});
+
+// search
+document.getElementById('searchInp').addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  document.querySelectorAll('.mind').forEach(m=>{
+    let f=false;
+    m.querySelectorAll('.knot').forEach(k=>{
+      const t=k.textContent.toLowerCase();
+      if(!q||t.includes(q)){k.style.display='block';f=true}
+      else k.style.display='none';
+    });
+    m.style.display=(f||!q)?'block':'none';
+  });
+});
+
+// flashcard
+function fcStart(){
+  S.fi=0;
+  let pts=allPts(S.sub);
+  if(S.sub==='mixed') pts=pts.sort(()=>Math.random()-0.5);
+  else pts=pts.sort(()=>Math.random()-0.5);
+  if(!pts.length){alert('没有考点');return}
+  S.fq=pts;
+  document.getElementById('fcOverlay').classList.add('show');
+  fcShow();
+}
+function fcShow(){
+  if(S.fi>=S.fq.length){
+    document.getElementById('fcQ').innerHTML='🎉 全部搞定！<div style="font-size:14px;color:var(--text2);margin-top:8px">太棒了，你已经完成一轮复习 👏</div>';
+    document.getElementById('fcLife').classList.remove('show');
+    document.getElementById('fcA').classList.remove('show');
+    document.getElementById('fcActs').innerHTML='<button class="fc-done" onclick="fcClose()" style="flex:1">返回</button>';
+    document.getElementById('fcBar').textContent=`完成 ${S.fq.length}/${S.fq.length}`;
+    return;
+  }
+  const p=S.fq[S.fi];
+  document.getElementById('fcHead').textContent=p.subName;
+  document.getElementById('fcCh').textContent=p.chName;
+  document.getElementById('fcQ').innerHTML=`${p.kw}<div class="hint">👆 点我展开</div>`;
+  document.getElementById('fcLife').innerHTML=`<div class="lb">💡 生活化理解</div>${(p.life||'').replace(/\n/g,'<br>')}`;
+  document.getElementById('fcLife').classList.remove('show');
+  document.getElementById('fcA').innerHTML=(p.detail||'').replace(/\n/g,'<br>');
+  document.getElementById('fcA').classList.remove('show');
+  document.getElementById('fcBar').textContent=`第 ${S.fi+1}/${S.fq.length} 题`;
+  document.getElementById('fcActs').innerHTML=`
+    <button class="fc-dunno" onclick="fcAct('dunno')">❌ 不会</button>
+    <button class="fc-know" onclick="fcAct('know')">✅ 已会</button>
+    <button class="fc-next" onclick="fcNext()">⏭ 下一题</button>`;
+  document.getElementById('fcQ').onclick=function(){
+    document.getElementById('fcLife').classList.add('show');
+    document.getElementById('fcA').classList.add('show');
+    this.querySelector('.hint')&&(this.querySelector('.hint').textContent='');
+  };
+}
+function fcAct(a){
+  const p=S.fq[S.fi];
+  if(!p)return;
+  if(a==='know')S.memo[p.key]=true;
+  else{S.memo[p.key]=false;S.weak[p.key]=true}
+  save();
+  fcNext();
+}
+function fcNext(){S.fi++;fcShow()}
+function fcClose(){document.getElementById('fcOverlay').classList.remove('show');render()}
+
+// dark mode
+function toggleDark(){S.dark=!S.dark;document.body.classList.toggle('dark',S.dark);document.getElementById('darkBtn').textContent=S.dark?'☀️':'🌙';save()}
+if(S.dark){document.body.classList.add('dark');document.getElementById('darkBtn').textContent='☀️'}
+
+// reset
+function resetAll(){if(!confirm('确定重置所有学习进度（含真题记录）？'))return;localStorage.clear();S.memo={};S.star={};S.weak={};examAnswered={};render()}
+
+// pages
+document.querySelectorAll('.bot div').forEach(el=>{
+  el.addEventListener('click',function(){
+    document.querySelectorAll('.bot div').forEach(d=>d.classList.remove('active'));
+    this.classList.add('active');
+    S.page=this.dataset.p;
+    if(S.page==='main')showMainPage();
+    else     if(S.page==='exam')showExamPage();
+    else if(S.page==='mashup')showMashupPage();
+    else if(S.page==='fw')showFrameworkPage();
+    else if(S.page==='star')showStarPage();
+    else if(S.page==='weak')showWeakPage();
+    else if(S.page==='about')showAboutPage();
+  });
+});
+
+let examAnswered = JSON.parse(localStorage.getItem('cpa_exam')||'{}');
+function saveExam(){localStorage.setItem('cpa_exam',JSON.stringify(examAnswered))}
+var examCurrentFilter = 'all';
+
+function showExamPage(){
+  document.querySelectorAll('.scroll-wrap,.spec,.exam-wrap,.mash-wrap,.fw-wrap').forEach(e=>e.classList.remove('show'));
+  document.querySelector('.sub-bar').style.display='flex';
+  document.querySelector('.search-row').style.display='none';
+  document.getElementById('statRow').style.display='none';
+  const w=document.getElementById('examWrap');
+  w.classList.add('show');
+
+  let html=`
+    <div class="exam-hd">📝 历年真题演练
+      <span class="esub">点击选项看解析</span>
+    </div>
+    <div class="exam-info" style="display:flex;gap:8px;flex-wrap:wrap">
+      <span style="background:var(--card);padding:3px 10px;border-radius:12px" onclick="examFilter('all')">📋 全部</span>
+      <span style="background:var(--card);padding:3px 10px;border-radius:12px" onclick="examFilter('jjf')">📜 经济法</span>
+      <span style="background:var(--card);padding:3px 10px;border-radius:12px" onclick="examFilter('zl')">🎯 战略</span>
+      <span style="background:var(--card);padding:3px 10px;border-radius:12px" onclick="examFilter('wrong')">❌ 错题</span>
+    </div>
+    <div id="examList"></div>
+  `;
+  w.innerHTML=html;
+  examRenderList();
+}
+
+function examRenderList(){
+  const container=document.getElementById('examList');
+  let allQs=[];
+  Object.keys(EXAMS).forEach(sub=>{
+    EXAMS[sub].forEach((q,i)=>{
+      const key=sub+'-'+i;
+      allQs.push({...q,sub,idx:i,key});
+    });
+  });
+
+  // filter
+  if(examCurrentFilter==='jjf') allQs=allQs.filter(q=>q.sub==='jjf');
+  else if(examCurrentFilter==='zl') allQs=allQs.filter(q=>q.sub==='zl');
+  else if(examCurrentFilter==='wrong') allQs=allQs.filter(q=>examAnswered[q.key]===false);
+
+  if(!allQs.length){
+    container.innerHTML='<div class="exam-empty">🎉 没有符合条件的题目</div>';
+    return;
+  }
+
+  let html='';
+  allQs.forEach((q,qi)=>{
+    const key=q.key;
+    const ansState=examAnswered[key]; // true=correct, false=wrong, undefined=not answered
+    const isMulti=typeof q.ans==='string';
+    const label=isMulti?'【多选题】':'【单选题】';
+    const subName=q.sub==='jjf'?'📜经济法':'🎯战略';
+
+    html+=`<div class="exam-q" id="eq-${qi}">
+      <div class="qhead"><span class="qtag">${label}</span> ${subName}</div>
+      <div class="qtext">${q.q}</div>
+      <div class="opts" id="opts-${qi}">`;
+
+    q.opts.forEach((opt,oi)=>{
+      const letter=String.fromCharCode(65+oi);
+      let cls='opt';
+      if(ansState!==undefined){
+        cls+=' dis';
+        // highlight correct answer
+        if(isMulti){
+          if(q.ans.includes(letter)) cls+=' cor';
+        } else {
+          if(oi===q.ans) cls+=' cor';
+        }
+        // highlight wrong answer
+        if(ansState===false){
+          if(isMulti){
+            // if user selected this and it was wrong
+          } else {
+            if(oi!==q.ans && examAnswered[key+'_sel']===oi) cls+=' wro';
+          }
+        }
+      }
+      const selected=(examAnswered[key+'_sel']===oi)||(ansState!==undefined && isMulti && examAnswered[key+'_sel'] && examAnswered[key+'_sel'].includes(oi));
+      if(selected && isMulti && ansState!==undefined){
+        // mark selected wrong options
+        if(!q.ans.includes(letter)) cls='opt dis wro';
+      }
+
+      html+=`<div class="${cls}" onclick="examAnswer('${key}',${oi},${qi},${isMulti})">
+        ${letter}. ${opt.substring(3)}
+      </div>`;
+    });
+
+    html+=`</div>`;
+
+    if(ansState!==undefined){
+      html+=`<div class="explain show" id="expl-${qi}">
+        <div class="elb">💡 解析</div>
+        <div class="eans">${ansState?'✅ 回答正确！':'❌ 回答错误'}</div>
+        <div style="margin-top:4px">${q.explain}</div>
+        <div class="elif">🎯 生活化理解：${q.life||''}</div>
+      </div>`;
+    }
+
+    html+=`</div>`;
+  });
+
+  container.innerHTML=html;
+}
+
+function examAnswer(key,oi,qi,isMulti){
+  const qidx=key;
+  if(examAnswered[qidx]!==undefined) return; // already answered
+
+  const sub=key.split('-')[0];
+  const idx=parseInt(key.split('-')[1]);
+  const q=EXAMS[sub][idx];
+
+  // For single choice: save selection and answer immediately
+  if(!isMulti){
+    const correct=(oi===q.ans);
+    examAnswered[qidx]=correct;
+    examAnswered[qidx+'_sel']=oi;
+    saveExam();
+    examRenderList();
+    return;
+  }
+
+  // For multi: toggle selection, need a confirm mechanism
+  // Simple approach: store selections in temp, click again to submit
+  if(!window._multiSel) window._multiSel={};
+  if(!window._multiSel[key]) window._multiSel[key]=[];
+  const arr=window._multiSel[key];
+  const li=arr.indexOf(oi);
+  if(li>=0) arr.splice(li,1);
+  else arr.push(oi);
+
+  // Update UI visually
+  const opts=document.querySelectorAll(`#opts-${qi} .opt`);
+  opts.forEach((el,i)=>{
+    if(arr.includes(i)) el.classList.add('sel');
+    else el.classList.remove('sel');
+  });
+
+  // Show submit button for multi
+  let submitBtn=document.getElementById(`msub-${qi}`);
+  if(!submitBtn && arr.length>0){
+    const parent=document.getElementById(`opts-${qi}`);
+    const btn=document.createElement('div');
+    btn.id=`msub-${qi}`;
+    btn.textContent='提交答案';
+    btn.style.cssText='margin-top:8px;padding:8px 16px;background:var(--green);color:#fff;border:none;border-radius:8px;font-size:13px;cursor:pointer;font-weight:600;text-align:center';
+    btn.onclick=function(){
+      const ansArr=window._multiSel[key]||[];
+      ansArr.sort();
+      const ansLetters=ansArr.map(i=>String.fromCharCode(65+i)).join('');
+      const correct=(ansLetters===q.ans);
+      examAnswered[qidx]=correct;
+      examAnswered[qidx+'_sel']=ansArr;
+      saveExam();
+      delete window._multiSel[key];
+      examRenderList();
+    };
+    parent.appendChild(btn);
+  } else if(submitBtn && arr.length===0){
+    submitBtn.remove();
+  }
+}
+
+function examFilter(f){
+  examCurrentFilter=f;
+  // Update active filter style
+  document.querySelectorAll('.exam-info span').forEach(el=>{
+    el.style.background='var(--card)';
+    el.style.color='var(--text2)';
+  });
+  const spans=document.querySelectorAll('.exam-info span');
+  const idx={'all':0,'jjf':1,'zl':2,'wrong':3}[f]||0;
+  if(spans[idx]){
+    spans[idx].style.background='var(--pri)';
+    spans[idx].style.color='#fff';
+  }
+  examRenderList();
+}
+
+// mashup data: related concept chains for rapid-fire
+const MASHUPS = [
+  // 经济法 对比串
+  {sub:'jjf',q:'抵押 vs 质押 — 最大区别是什么？', life:'抵押=你向银行借钱用房子担保，但你继续住着（不交房）。质押=你去当铺当手表，手表得放当铺里（交物）。\n简单记：抵押不交物（房贷），质押要交物（当铺）。', detail:'抵押：不转移占有，适用于不动产+动产。质权：转移占有，适用于动产+权利。质押需交付或登记才能设立。', ch:'物权法 vs 担保', tag:'对比·高频'},
+  {sub:'jjf',q:'普通合伙人 vs 有限合伙人 — 核心区别是什么？', life:'你和你朋友合伙开店：普通合伙人=店亏了你得卖房还债（无限连带）。有限合伙人=亏最多亏掉你出的那部分钱（有限责任）。\n一个像"船长"，一个像"乘客"。', detail:'普通：承担无限连带责任，可执行合伙事务，可劳务出资。有限：以认缴出资额为限承担有限责任，不得执行事务，不得劳务出资。', ch:'合伙企业法', tag:'对比·必考'},
+  {sub:'jjf',q:'要约 vs 要约邀请 — 怎么区分？', life:'要约=你在菜单上指着一道菜说"老板这个多少钱？"（我要买）。要约邀请=老板贴广告"本店新菜上市"（来看看吧）。\n要约内容更具体，有"我要买"的意思。', detail:'要约：内容具体确定+表明受约束（如价目表+数量）。要约邀请：希望他人向自己发出要约（拍卖公告、招标公告、商业广告一般不算）。', ch:'合同法', tag:'对比·易混'},
+  {sub:'jjf',q:'代位权 vs 撤销权 — 各管什么事？', life:'代位权=小王欠你钱，小张又欠小王钱，小王不主动去要→你可以直接找小张要（帮你催债）。\n撤销权=小王欠你钱，却把房子低价卖给他亲戚→你可以去法院申请"这笔交易不算数"（防止逃债）。', detail:'代位权：债务人怠于行使债权→债权人代位追偿。撤销权：债务人低价/无偿转让财产损害债权人→可请求撤销。', ch:'合同法·保全', tag:'对比·高频'},
+  {sub:'jjf',q:'无效 vs 可撤销 — 法律行为有什么区别？', life:'无效=天生不行（从小到大的成绩都作废）→无民事行为能力人干的/违法的/虚假的。\n可撤销=暂时有效但可以反悔（1年内可以退）→重大误解/被骗/被逼的/不公平。', detail:'无效：①无民事行为能力人。②虚假意思。③违法/公序良俗。④恶意串通。可撤销：①重大误解（90日）。②欺诈。③胁迫（1年）。④显失公平（1年）。最长5年。', ch:'民事法律行为', tag:'对比·核心'},
+  {sub:'jjf',q:'诉讼时效中止 vs 中断 — 闹钟怎么算？', life:'中止=你的闹钟响了但外面下暴雨你起不来→等雨停再补睡6小时（最后6个月遇不可抗力）。\n中断=你按掉了闹钟重新设定时→从新的时间开始重新算3年（去起诉/对方认错）。', detail:'中止：最后6个月内因不可抗力等暂停，事由消除后补6个月。中断：因起诉、请求、认诺等重新计算（可多次）。', ch:'诉讼时效', tag:'对比·易混'},
+  {sub:'jjf',q:'普通合伙 vs 有限合伙 — 退伙规则有什么不同？', life:'普通合伙人：欠债还不起就得退伙（被强制出局）。有限合伙人：欠债还不起还能继续当合伙人（不影响）。\n简单记：有限合伙人"抗打"，个人破产了还能在合伙里待着。', detail:'普通合伙人丧失偿债能力→当然退伙。有限合伙人丧失偿债能力→不退伙。有限合伙人退伙后对退伙前债务以取回财产为限担责。', ch:'合伙企业法', tag:'对比'},
+  {sub:'jjf',q:'重整 vs 和解 — 公司"病危"了怎么救？', life:'重整=大手术（公司还有救！削股东股份、延期还债，所有人都得配合）。和解=吃个药（只谈债务打折分期还，不碰股权，只有公司自己能申请）。\n重整更猛、和解更温和。', detail:'重整：债务人或债权人+出资额≥10%可申请，可调整股权，约束所有债权人。和解：仅债务人可申请，仅调整债务。', ch:'破产法', tag:'对比·重点'},
+  // 战略 对比串
+  {sub:'zl',q:'成本领先 vs 差异化 — 两种打法怎么选？', life:'成本领先=做最便宜的（小米：同样配置比别人便宜）。差异化=做最特别的（苹果：我就是贵但好用）。\n两者不能都要，否则"夹在中间"最危险。', detail:'成本领先：规模经济+经验曲线+简化+控制，适合价格敏感市场。差异化：品牌+技术+服务+设计，适合需求多样市场。', ch:'竞争战略', tag:'对比·核心'},
+  {sub:'zl',q:'红海 vs 蓝海 — 在哪竞争？', life:'红海=大家都在一个鱼塘里钓鱼，鱼越来越少（共享单车大战）。蓝海=自己挖一个新鱼塘（任天堂Wii不跟PS比画质，做体感游戏吸引家庭玩家）。\n红海拼杀，蓝海创新。', detail:'红海：现有市场空间竞争激烈（价格战、同质化）。蓝海：创造新市场空间（价值创新，不靠技术靠客户价值）。', ch:'战略选择', tag:'对比·经典'},
+  {sub:'zl',q:'黑天鹅 vs 灰犀牛 — 风险长啥样？', life:'黑天鹅=你想都想不到的灾难（突然来的疫情，谁也没预料到这么大影响）。灰犀牛=明摆着的大问题但大家装看不见（房价泡沫，都知道迟早要爆）。\n黑天鹅靠弹性、灰犀牛靠提前行动。', detail:'黑天鹅：罕见+影响巨大+事后可解释（不可预测极端风险）。灰犀牛：大概率+影响大+明显但被忽视（可预见但拖延）。', ch:'风险管理', tag:'对比·形象'},
+  {sub:'zl',q:'使命 vs 愿景 — 先有鸡还是先有蛋？', life:'使命=你开奶茶店是为了"让更多人喝到好奶茶"（为什么存在）。愿景=你想"开遍全国"（想成为什么）。\n使命是初心不变，愿景是未来目标。', detail:'使命（存在目的：我们为什么存在）→愿景（想成为什么：我们想成为什么样的企业）→战略目标（SMART具体目标）。', ch:'战略管理概述', tag:'对比·基础'},
+  {sub:'zl',q:'横向一体化 vs 纵向一体化 — 往哪边并？', life:'横向一体化=你把对面那家奶茶店买下来（吃掉同行）。纵向一体化=你开始自己种茶叶（后向/向供应商）或自己开连锁店（前向/向客户）。\n横着吃同行，竖着吃上下游。', detail:'前向一体化（靠近客户/渠道）。后向一体化（靠近供应商/原料）。横向一体化（合并竞争对手）。', ch:'一体化战略', tag:'对比·分类'},
+  // 跨科目 对比串
+  {sub:'both',q:'经济法中的"善意取得" vs 战略中的"善意"— 有啥联系？', life:'经济法善意取得=你不知情买了赃物，法律保护你。战略中的"善意"=企业做对社会有益的事。\n虽然都叫"善意"，但经济法讲的是"不知情者的保护"，战略讲的是"做好事"。（跨科目联系：理解信任机制在商业中的作用）', detail:'经济法善意取得：受让人善意+合理价格+交付→原始取得所有权。战略中的善意相关概念：企业社会责任、利益相关者治理、诚信价值观（控制环境要素）。', ch:'跨科目串联', tag:'跨界思考💡'},
+  {sub:'both',q:'经济法的"合同" vs 战略的"战略联盟" — 都是"约定"，区别在哪？', life:'合同=你找隔壁老王签了个协议（具体买卖、租赁等，法律保护）。战略联盟=你和竞争对手说"我们合作开发新技术吧"（公司层面的合作，不一定是严格的法律合同）。\n合同更"硬"有法律强制力，战略联盟更"软"靠信任和共同利益。', detail:'合同：具有法律约束力的协议，违约可诉讼。战略联盟：企业间合作协议（合资/持股/契约式），更多基于商业利益和信任，法律约束力相对较弱。', ch:'跨科目串联', tag:'跨界思考💡'},
+  {sub:'both',q:'经济法"股东大会" vs 战略"公司治理" — 啥关系？', life:'股东大会=公司最大的"股东大会"（老板们开会做决定）。公司治理=怎么管好"管公司的人"（防止经理乱来、防止大股东欺负小股东）。\n股东大会是公司治理的一个"工具"或"环节"，公司治理是更大的制度框架。', detail:'股东大会是公司最高权力机构（重大事项决策权）。公司治理是协调股东、董事会、管理层等的制度安排，股东大会是治理机制的重要组成部分。', ch:'跨科目串联', tag:'跨界思考💡'},
+  {sub:'both',q:'经济法"破产清偿顺序" vs 战略"风险管理"— 有关系吗？', life:'破产清偿=公司倒了钱怎么分（先给员工→再交税→最后给债主）。风险管理=提前想办法不倒（识别风险→评估→应对→监控）。\n好的风险管理能让公司不走到破产那一步！学好战略的风控，就能避免经济法破产章节里的"惨剧"。', detail:'风险管理做得好→企业抗风险能力强→不容易破产。经济法的破产制度是"最后一道防线"，战略的风控是"提前筑墙"。两者一体两面。', ch:'跨科目串联', tag:'跨界思考💡'},
+];
+
+var mashState = {idx:0,queue:[],streak:0,maxStreak:0,score:0,total:0,mode:'rapid'};
+
+function showMashupPage(){
+  document.querySelectorAll('.scroll-wrap,.spec,.exam-wrap,.mash-wrap').forEach(e=>e.classList.remove('show'));
+  document.querySelector('.sub-bar').style.display='flex';
+  document.querySelector('.search-row').style.display='none';
+  document.getElementById('statRow').style.display='none';
+
+  // which mode: 'rapid' (快速刷) or 'compare' (对比记忆)
+  const mode = mashState.mode;
+
+  const w=document.getElementById('mashWrap');
+  w.classList.add('show');
+
+  if(mode==='compare'){
+    renderComparePage(w);
+    return;
+  }
+
+  // rapid fire mode
+  if(mashState.queue.length===0 || mashState.idx>=mashState.queue.length){
+    // build new queue from mashups
+    let pool = MASHUPS.filter(m => {
+      if(m.sub==='both') return true;
+      const subject = m.sub==='jjf'?'jjf':'zl';
+      // check what subject user is on - use sub preference
+      return true; // always include all
+    });
+    // shuffle
+    for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]]}
+    mashState.queue = pool;
+    mashState.idx = 0;
+  }
+
+  renderMashRapid(w);
+}
+
+function renderMashRapid(w){
+  if(mashState.idx>=mashState.queue.length){
+    const pct = mashState.total ? Math.round(mashState.score/mashState.total*100) : 0;
+    w.innerHTML=`
+      <div class="mash-hd">🔥 知识点串烧 <span class="msub">完成！</span></div>
+      <div class="mash-box" style="text-align:center;padding:30px">
+        <div style="font-size:40px;margin-bottom:12px">🎉</div>
+        <div style="font-size:18px;font-weight:700;margin-bottom:8px">本轮串烧结束！</div>
+        <div style="font-size:13px;color:var(--text2);margin-bottom:16px">
+          回答 ${mashState.total} 题 · 正确 ${mashState.score} 题 · 正确率 ${pct}%
+        </div>
+        <div style="font-size:13px;color:var(--text2);margin-bottom:20px">
+          🔥 最长连续答对 ${mashState.maxStreak} 题
+        </div>
+        <div style="display:flex;gap:8px;justify-content:center">
+          <button onclick="mashState.mode='rapid';mashState.queue=[];showMashupPage()" style="padding:10px 24px;border:none;border-radius:10px;background:var(--pri);color:#fff;font-size:14px;font-weight:600;cursor:pointer">再来一轮 🔄</button>
+          <button onclick="mashState.mode='compare';showMashupPage()" style="padding:10px 24px;border:none;border-radius:10px;background:var(--orange);color:#fff;font-size:14px;font-weight:600;cursor:pointer">对比记忆 📊</button>
+        </div>
+      </div>
+      <div class="mash-streak">🔥 历史最佳连续答对：${mashState.maxStreak} 题</div>
+    `;
+    return;
+  }
+
+  const m = mashState.queue[mashState.idx];
+  const subName = m.sub==='jjf'?'📜经济法':(m.sub==='zl'?'🎯战略':'🔗跨科目');
+
+  w.innerHTML=`
+    <div class="mash-hd">🔥 知识点串烧 <span class="msub">${subName}</span></div>
+    <div class="mash-stat">
+      <span>🏆 得分 ${mashState.score}/${mashState.total}</span>
+      <span>🔥 连对 ${mashState.streak}</span>
+      <span>📊 第 ${mashState.idx+1}/${mashState.queue.length} 题</span>
+    </div>
+    <div class="mash-box" id="mashBox">
+      <div class="m-sub">${subName}</div>
+      <div class="m-ch">${m.ch} · <span style="color:var(--orange)">${m.tag||''}</span></div>
+      <div class="m-q">${m.q}</div>
+      <div class="m-life" id="mashLife">${m.life?(('<div class=\"mlb\">💡 生活化理解</div>')+m.life.replace(/\n/g,'<br>')):''}</div>
+      <div class="m-detail" id="mashDetail">${m.detail||''}</div>
+      <div class="m-hint" id="mashHint" onclick="revealMash()">👆 点我展开答案</div>
+    </div>
+    <div class="mash-acts" id="mashActs">
+      <button class="mdunno" onclick="mashAct(false)">❌ 不会</button>
+      <button class="mskip" onclick="mashSkip()">⏭ 跳过</button>
+      <button class="mknow" onclick="mashAct(true)">✅ 我会</button>
+    </div>
+    <div class="mash-streak">🔥 连续答对：<span id="mashStreak">${mashState.streak}</span> · 最佳：${mashState.maxStreak}</div>
+  `;
+}
+
+function revealMash(){
+  document.getElementById('mashLife')?.classList.add('show');
+  document.getElementById('mashDetail')?.classList.add('show');
+  const hint=document.getElementById('mashHint');
+  if(hint) hint.textContent = '📖 答案已展开';
+}
+
+function mashAct(know){
+  const m = mashState.queue[mashState.idx];
+  if(!m) return;
+  mashState.total++;
+  if(know){
+    mashState.score++;
+    mashState.streak++;
+    if(mashState.streak > mashState.maxStreak) mashState.maxStreak = mashState.streak;
+  } else {
+    mashState.streak = 0;
+  }
+  mashState.idx++;
+  showMashupPage();
+}
+
+function mashSkip(){
+  mashState.idx++;
+  showMashupPage();
+}
+
+function renderComparePage(w){
+  // Group MASHUPS by tag for comparison view
+  const compareItems = MASHUPS.filter(m => m.tag && (m.tag.includes('对比') || m.tag.includes('跨界')));
+
+  let html=`
+    <div class="mash-hd">📊 对比记忆 <span class="msub">易混考点一网打尽</span></div>
+    <div class="mash-stat" style="margin-bottom:8px">
+      <span>一共 ${compareItems.length} 组对比</span>
+      <span style="cursor:pointer" onclick="mashState.mode='rapid';mashState.queue=[];showMashupPage()">🔄 切到快速串烧</span>
+    </div>
+  `;
+
+  compareItems.forEach((m,i)=>{
+    const subName = m.sub==='jjf'?'📜':(m.sub==='zl'?'🎯':'🔗');
+    html+=`
+      <div class="mash-box" style="padding:14px">
+        <div class="m-sub">${subName} ${m.ch} · <span style="color:var(--orange);font-size:10px">${m.tag||''}</span></div>
+        <div class="m-q" style="font-size:16px;margin-bottom:8px">${m.q}</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:6px">${m.life?(m.life.replace(/\n/g,'<br>')):''}</div>
+        <div style="font-size:12px;line-height:1.6;color:var(--text);background:var(--bg);padding:10px;border-radius:8px">${m.detail||''}</div>
+      </div>
+    `;
+  });
+
+  w.innerHTML=html;
+}
+
+const FRAMEWORK = {
+  jjf: {
+    name:'经济法', icon:'📜', color:'#6c5ce7',
+    tagline:'法律的底层逻辑是"保护弱者、维护公平"——理解了这一点，整本书一通百通',
+    chapters: [
+      {n:'法律基本原理',star:3,wt:'5%',diff:'⭐',ess:'法律的"游戏规则总则"——告诉你法律是啥、谁能在法律里玩、怎么玩。',bigq:['法律和我们日常生活有什么关系？','一个人从出生到死亡，法律上经历了哪些变化？'],links:['→ 第2章：基本原理是后面所有章的基础'],tip:'第一章不用深究，看懂了就行，重点在第2章开始'},
+      {n:'基本民事法律制度',star:5,wt:'10%',diff:'⭐⭐',ess:'民事活动中的"通用规则"——签合同、买东西、被人骗了怎么办，都在这章。',bigq:['什么样的合同是无效的？什么样的可以反悔？','欠债不还，债主可以在多长时间内告你？'],links:['← 基于第1章原理','→ 第3、4章的具体运用'],tip:'诉讼时效必考！重大误解90日和胁迫1年要分清'},
+      {n:'物权法律制度',star:5,wt:'12%',diff:'⭐⭐⭐',ess:'"这个东西到底是谁的"——房子登记、车子抵押、善意取得都在这。',bigq:['你把东西借给朋友，朋友卖了，你能要回来吗？','抵押和质押到底有什么区别？'],links:['← 民事法律制度的一般原理','→ 第4章（买卖物权是合同的基础）'],tip:'善意取得和抵押权每年必考大题，多花时间'},
+      {n:'合同法律制度',star:5,wt:'15%',diff:'⭐⭐⭐',ess:'"答应的事能不能反悔"——从买菜到买房，所有"交易"都受合同法管。',bigq:['网购买的东西在路上坏了谁负责？','定金的"双倍返还"是什么意思？'],links:['← 物权是合同的基础（买卖就是转移物权）','→ 第6章（公司签合同也适用合同法）'],tip:'分值最高的章节之一，合同解除和违约责任是重中之重'},
+      {n:'合伙企业法律制度',star:3,wt:'6%',diff:'⭐',ess:'"大家一起做生意"——合伙开公司，谁说了算、亏了怎么办。',bigq:['和朋友合伙开店，他欠的债你要还吗？','有限合伙人和普通合伙人有什么区别？'],links:['→ 第6章：公司是更高级的"做生意组织"'],tip:'对比记忆：普通vs有限合伙，内容不多但每年都考'},
+      {n:'公司法律制度',star:5,wt:'15%',diff:'⭐⭐⭐',ess:'"开公司的法律说明书"——公司怎么成立、谁管公司、股东有什么权利。',bigq:['小股东被大股东欺负了怎么办？','公司欠债还不起了，股东要自己掏钱还吗？'],links:['← 第5章是公司制的"初级版"','→ 第7章（上市公司的规则更复杂）'],tip:'与第5章合伙企业对照学习，效果最好'},
+      {n:'证券法律制度',star:4,wt:'10%',diff:'⭐⭐⭐',ess:'"上市圈钱的规矩"——股票怎么发、内幕交易为什么违法、怎么保护小散户。',bigq:['为什么公司还没公告消息，内部人买股票算违法？','买了垃圾股票亏了，能找公司赔吗？'],links:['← 第6章是基础（只有公司才能上市）','→ 结合第12章涉外投资'],tip:'内幕交易和虚假陈述是主观题常考点'},
+      {n:'企业破产法律制度',star:4,wt:'8%',diff:'⭐⭐⭐',ess:'"公司死了钱怎么分"——破产了员工工资和银行欠款谁先拿？',bigq:['公司破产了，清算的钱先给员工还是先还银行？','公司快破产了偷偷转移财产，能追回来吗？'],links:['← 第6章公司经营失败的结果','→ 风险管理（战略科目）'],tip:'清偿顺序口诀：破共→职工→税款→普通'},
+      {n:'票据与支付结算',star:3,wt:'7%',diff:'⭐⭐',ess:'"钱的替身"——汇票、本票、支票都是啥，怎么用。',bigq:['拿到一张支票，多久不去银行取就作废了？','票据上的签名是假的，谁承担责任？'],links:['→ 第4章（票据行为也是一种合同行为）'],tip:'分清三种票据的区别，出题点主要在抗辩和伪造变造'},
+      {n:'企业国有资产法律制度',star:2,wt:'4%',diff:'⭐',ess:'"国有企业的特殊规矩"——国企的钱不是老板的，是国家的不许乱动。',bigq:['国企的股份能随便卖给私人吗？','国企老总的亲戚能和国企做生意吗？'],links:['← 第6章的特殊版本'],tip:'分值少，重点记关联交易禁令和产权转让流程'},
+      {n:'反垄断法律制度',star:3,wt:'5%',diff:'⭐⭐',ess:'"不让大公司欺负人"——串通涨价、店大欺客、地方保护都违法。',bigq:['几家奶茶店商量好都卖25块，违法吗？','一家独大的公司能不能随便涨价？'],links:['→ 第12章：涉外反垄断也适用'],tip:'横向vs纵向垄断协议、经营者集中是常考点'},
+      {n:'涉外经济法律制度',star:2,wt:'3%',diff:'⭐⭐',ess:'"跟外国人做生意的规矩"——外商投资、反倾销、外汇管理。',bigq:['外国人来中国开店和中国人的待遇一样吗？','外国货卖得太便宜把国产货挤垮了怎么办？'],links:['← 第11章的涉外版本'],tip:'分值最少，考前两周看一遍即可'},
+    ]
+  },
+  zl: {
+    name:'战略', icon:'🎯', color:'#e17055',
+    tagline:'战略的本质是"做正确的事"——在正确的时间、把资源放到正确的地方',
+    chapters: [
+      {n:'战略与战略管理概述',star:3,wt:'5%',diff:'⭐',ess:'"什么是战略"——定方向、定目标、什么时候该转型。',bigq:['开公司的"使命"和"愿景"有什么区别？','公司什么时候该转型变革？'],links:['→ 第2章：先分析再定战略'],tip:'概念题为主，理解使命-愿景-目标三者的关系'},
+      {n:'战略分析',star:5,wt:'20%',diff:'⭐⭐⭐',ess:'"看天看地看自己"——PEST看大环境、五力看行业、SWOT看自己。',bigq:['在学校门口开奶茶店，用五力模型怎么分析？','怎么知道自己公司的"核心能力"是什么？'],links:['← 第1章是总纲','→ 第3章：分析完就要做选择了'],tip:'PEST+五力+SWOT+波士顿矩阵，四件套必考！多练案例题'},
+      {n:'战略选择',star:5,wt:'25%',diff:'⭐⭐⭐',ess:'"想好了怎么干"——是要低价竞争（成本领先）还是做高端（差异化）？',bigq:['小米和苹果的竞争策略有什么不同？','什么时候该"自己做"（一体化）vs"跟人合作"（战略联盟）？'],links:['← 基于第2章的分析结果','→ 第4章：选了之后怎么落地'],tip:'分值最高的章节！三大竞争战略和安索夫矩阵是绝对重点'},
+      {n:'战略实施',star:4,wt:'15%',diff:'⭐⭐',ess:'"说到做到"——定了战略怎么落地：组织架构怎么搭、怎么考核。',bigq:['大公司应该用"职能制"还是"事业部制"？','怎么用平衡计分卡考核公司业绩？'],links:['← 第3章选好战略后怎么落地','→ 第5章：实施中怎么管好人'],tip:'平衡计分卡四个维度要背熟，每年必考'},
+      {n:'公司治理',star:3,wt:'15%',diff:'⭐⭐',ess:'"管好管公司的人"——怎么防止经理乱花钱、大股东欺负小股东。',bigq:['公司请的CEO给自己发一个亿奖金合理吗？','独立董事是干什么的？'],links:['← 第4章实施需要好的治理','→ 第6章：治理不好会有风险'],tip:'三类代理问题是核心，用"经理→大股东→债权人"的顺序记'},
+      {n:'风险与风险管理',star:4,wt:'20%',diff:'⭐⭐⭐',ess:'"别翻车"——做生意可能遇到哪些坑，怎么提前防着。',bigq:['买保险属于哪种风险管理策略？','黑天鹅和灰犀牛分别是啥风险？'],links:['← 第5章治理不当会有哪些风险','↔ 经济法第8章破产是风险失控的后果'],tip:'COSO五要素口诀：控环→评估→活动→沟通→监督'},
+    ]
+  }
+};
+
+function showFrameworkPage(){
+  document.querySelectorAll('.scroll-wrap,.spec,.exam-wrap,.mash-wrap,.fw-wrap').forEach(e=>e.classList.remove('show'));
+  document.querySelector('.sub-bar').style.display='flex';
+  document.querySelector('.search-row').style.display='none';
+  document.getElementById('statRow').style.display='none';
+
+  const w=document.getElementById('fwWrap');
+  w.classList.add('show');
+  renderFramework(w);
+}
+
+var fwSub='jjf';
+function renderFramework(w){
+  const f=FRAMEWORK[fwSub];
+  let html=`
+    <div class="fw-top">
+      <div class="fwnm">${f.icon} ${f.name} — 知识体系全景图</div>
+      <div class="fwdesc">${f.tagline}</div>
+      <div class="fwstat">
+        <span>📖 ${f.chapters.length} 章</span>
+        <span>⭐ 星级越高越重要</span>
+      </div>
+    </div>
+    <div class="fw-path">
+      <div class="${fwSub==='jjf'?'active':''}" onclick="fwSub='jjf';renderFramework(document.getElementById('fwWrap'))">📜 经济法</div>
+      <div class="${fwSub==='zl'?'active':''}" onclick="fwSub='zl';renderFramework(document.getElementById('fwWrap'))">🎯 战略</div>
+    </div>
+  `;
+
+  // roadmap
+  html+=`<div class="fw-roadmap">
+    <div class="rhd">🗺️ 推荐学习路线</div>`;
+  f.chapters.forEach((ch,i)=>{
+    const icons=['①','②','③','④','⑤','⑥','⑦','⑧','⑨','⑩','⑪','⑫'];
+    html+=`<div class="rstep">
+      <div class="rnum">${i+1}</div>
+      <div class="rtxt"><b>${ch.n}</b> ${'⭐'.repeat(parseInt(ch.star)||1)} · 占比${ch.wt} · 难度${ch.diff}<br>${ch.ess}</div>
+    </div>`;
+  });
+  html+=`</div>`;
+
+  // chapter cards
+  f.chapters.forEach((ch,i)=>{
+    const stars='⭐'.repeat(ch.star)+(ch.star<5?'☆'.repeat(5-ch.star):'');
+    html+=`
+      <div class="fw-ch" onclick="fwToggle(this)">
+        <div class="fchd">
+          <span class="fnum">${('0'+(i+1)).slice(-2)}</span>
+          <span class="fname">${ch.n}</span>
+          <span class="fstar">${stars}</span>
+        </div>
+        <div class="fess">💡 ${ch.ess}</div>
+        <div class="fmeta">
+          <span class="fw">📊 分值 ${ch.wt}</span>
+          <span class="fdiff">难度 ${ch.diff}</span>
+        </div>
+        <div class="fw-bigq">
+          <span class="bqlb">🤔 学完这章你能回答：</span><br>
+          ${ch.bigq.map((q,i)=>`${i+1}. ${q}`).join('<br>')}
+        </div>
+        <div class="fqslink">🔗 ${ch.links.join('<br>')}</div>
+        <div class="ftip">💬 学习建议：${ch.tip}</div>
+      </div>`;
+  });
+
+  w.innerHTML=html;
+}
+
+function fwToggle(el){
+  ['fw-bigq','fqslink','ftip'].forEach(cls=>{
+    const c=el.querySelector('.'+cls);
+    if(c)c.classList.toggle('show');
+  });
+}
+
+function showMainPage(){
+  document.querySelectorAll('.scroll-wrap,.spec,.exam-wrap,.mash-wrap,.fw-wrap').forEach(e=>e.classList.remove('show'));
+  document.querySelector('.sub-bar').style.display='flex';
+  document.querySelector('.search-row').style.display='block';
+  document.getElementById('statRow').style.display='flex';
+  document.getElementById('mainWrap').classList.add('show');
+  render();
+}
+function showStarPage(){
+  document.querySelectorAll('.scroll-wrap,.spec,.exam-wrap,.mash-wrap,.fw-wrap').forEach(e=>e.classList.remove('show'));
+  document.querySelector('.sub-bar').style.display='none';
+  document.querySelector('.search-row').style.display='none';
+  document.getElementById('statRow').style.display='none';
+  const w=document.getElementById('starWrap');
+  w.classList.add('show');
+  let pts=[];
+  Object.keys(S.star).forEach(key=>{
+    if(!S.star[key])return;
+    const [sub,ci,pi]=key.split('-');
+    if(!DATA[sub]||!DATA[sub].chapters[ci]||!DATA[sub].chapters[ci].points[pi])return;
+    const p=DATA[sub].chapters[ci].points[pi];
+    pts.push({...p,sub,ci,pi,key,chName:DATA[sub].chapters[ci].name,subName:DATA[sub].name});
+  });
+  let html=`<div class="hd">⭐ 收藏考点 <span style="font-size:13px;color:var(--text2)">共${pts.length}个</span></div>`;
+  if(!pts.length)html+='<p style="color:var(--text2);text-align:center;padding:40px 0">还没有收藏考点哦～<br>在考点上点⭐收藏</p>';
+  else pts.forEach(p=>{
+    html+=`<div class="knot" onclick="toggleKnot(this)" style="margin-bottom:8px">
+      <div class="kw">${p.kw} <span style="font-size:10px;color:var(--text2)">${p.subName}/${p.chName}</span></div>
+      <div class="life"><div class="lb">💡 生活化理解</div>${(p.life||'').replace(/\n/g,'<br>')}</div>
+      <div class="detail">${(p.detail||'').replace(/\n/g,'<br>')}</div>
+    </div>`;
+  });
+  w.innerHTML=html;
+}
+function showWeakPage(){
+  document.querySelectorAll('.scroll-wrap,.spec,.exam-wrap,.mash-wrap,.fw-wrap').forEach(e=>e.classList.remove('show'));
+  document.querySelector('.sub-bar').style.display='none';
+  document.querySelector('.search-row').style.display='none';
+  document.getElementById('statRow').style.display='none';
+  const w=document.getElementById('weakWrap');
+  w.classList.add('show');
+  let pts=[];
+  Object.keys(S.weak).forEach(key=>{
+    if(!S.weak[key])return;
+    const [sub,ci,pi]=key.split('-');
+    if(!DATA[sub]||!DATA[sub].chapters[ci]||!DATA[sub].chapters[ci].points[pi])return;
+    const p=DATA[sub].chapters[ci].points[pi];
+    pts.push({...p,sub,ci,pi,key,chName:DATA[sub].chapters[ci].name,subName:DATA[sub].name});
+  });
+  let html=`<div class="hd">💪 薄弱考点 <span style="font-size:13px;color:var(--text2)">共${pts.length}个 · 重点攻关</span></div>`;
+  if(!pts.length)html+='<p style="color:var(--text2);text-align:center;padding:40px 0">还没有薄弱考点～<br>刷题时点"不会"会自动记录</p>';
+  else pts.forEach(p=>{
+    html+=`<div class="knot weak" onclick="toggleKnot(this)" style="margin-bottom:8px">
+      <div class="kw">${p.kw} <span style="font-size:10px;color:var(--text2)">${p.subName}/${p.chName}</span></div>
+      <div class="life"><div class="lb">💡 生活化理解</div>${(p.life||'').replace(/\n/g,'<br>')}</div>
+      <div class="detail">${(p.detail||'').replace(/\n/g,'<br>')}</div>
+    </div>`;
+  });
+  w.innerHTML=html;
+}
+function showAboutPage(){
+  document.querySelectorAll('.scroll-wrap,.spec,.exam-wrap,.mash-wrap,.fw-wrap').forEach(e=>e.classList.remove('show'));
+  document.querySelector('.sub-bar').style.display='none';
+  document.querySelector('.search-row').style.display='none';
+  document.getElementById('statRow').style.display='none';
+  const w=document.getElementById('aboutWrap');
+  w.classList.add('show');
+  w.innerHTML=`
+    <div class="mind" style="padding:24px;text-align:center">
+      <div style="font-size:40px;margin-bottom:12px">🧠</div>
+      <h2 style="font-size:18px;margin-bottom:8px">CPA 考点通关</h2>
+      <p style="color:var(--text2);font-size:13px;line-height:1.8;margin-bottom:16px">
+        基于2026年注册会计师考试大纲<br>
+        📜 经济法（12章96考点）+ 🎯 战略（6章60考点）
+      </p>
+      <div style="text-align:left;font-size:13px;color:var(--text2);line-height:2.2;padding:0 8px">
+        <p><b>📝 真题演练</b>：顶部"真题"标签进入，单多选+错题本</p>
+        <p><b>🔥 知识点串烧</b>：顶部"串烧"标签进入，易混对比+快速刷+跨科目串联</p>
+        <p><b>📐 知识体系</b>：顶部"体系"标签进入，章节重要性+分值+学习路线+关联分析</p>
+        <p><b>📚 学习模式</b>：点击章节展开→点击考点看生活化理解+考点详解</p>
+        <p><b>🃏 刷题模式</b>：顶部选"经济法/战略/混合刷"→右下角📖按钮开刷</p>
+        <p><b>💡 生活化理解</b>：每个考点都有生活场景类比，小白也能懂</p>
+        <p><b>✅ 标记已会</b>：会的点"已会"，进度条自动涨</p>
+        <p><b>⭐ 收藏</b>：重点考点点星，底部导航单独看</p>
+        <p><b>🔴 薄弱标记</b>：刷题答错的自动记到弱点本</p>
+        <p><b>🌙 深色模式</b>：右上角一键切换，通勤路上不刺眼</p>
+        <p><b>💾 自动保存</b>：所有进度存浏览器，关掉再来还有</p>
+      </div>
+      <p style="margin-top:20px;font-size:14px;background:linear-gradient(135deg,var(--pri),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700">
+        每天刷一刷，2个月两门稳过 💪
+      </p>
+      <div style="margin-top:16px;display:flex;justify-content:center;gap:12px">
+        <div class="grid-item" style="flex:0 0 auto;min-width:80px" onclick="S.sub='jjf';showMainPage()">
+          <div class="num" style="font-size:20px">📜</div>
+          <div class="lbl">经济法</div>
+        </div>
+        <div class="grid-item" style="flex:0 0 auto;min-width:80px" onclick="S.sub='zl';showMainPage()">
+          <div class="num" style="font-size:20px">🎯</div>
+          <div class="lbl">战略</div>
+        </div>
+        <div class="grid-item" style="flex:0 0 auto;min-width:80px" onclick="S.sub='mixed';showMainPage()">
+          <div class="num" style="font-size:20px">🔀</div>
+          <div class="lbl">混合刷</div>
+        </div>
+        <div class="grid-item" style="flex:0 0 auto;min-width:80px" onclick="mashState.mode='rapid';mashState.queue=[];showMashupPage()">
+          <div class="num" style="font-size:20px">🔥</div>
+          <div class="lbl">串烧</div>
+        </div>
+      </div>
+    </div>`;
+}
+
+// float flashcard btn
+const floatBtn=document.createElement('button');
+floatBtn.textContent='📖';
+floatBtn.style.cssText='position:fixed;bottom:76px;right:16px;width:50px;height:50px;border-radius:25px;background:linear-gradient(135deg,var(--pri),var(--pink));color:#fff;border:none;font-size:20px;box-shadow:0 4px 16px rgba(108,92,231,.4);cursor:pointer;z-index:99';
+floatBtn.onclick=fcStart;
+document.body.appendChild(floatBtn);
+
+render();
+</script>
+</body>
+</html>
