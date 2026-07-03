@@ -204,8 +204,8 @@ body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;backgr
 .fw-roadmap .rstep .rtxt{font-size:12px;color:var(--text2);line-height:1.5;flex:1}
 .fw-roadmap .rstep .rtxt b{color:var(--text)}
 /* login overlay */
-.login-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:999;justify-content:center;align-items:center;padding:20px}
-.login-overlay.show{display:flex}
+.login-overlay{display:flex;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:999;justify-content:center;align-items:center;padding:20px}
+.login-overlay.hidden{display:none}
 .login-box{background:var(--card);border-radius:20px;width:100%;max-width:360px;padding:28px 24px;box-shadow:0 12px 40px rgba(0,0,0,.3)}
 .login-box .lhd{font-size:20px;font-weight:700;text-align:center;margin-bottom:4px}
 .login-box .lsub{font-size:13px;color:var(--text2);text-align:center;margin-bottom:20px;line-height:1.5}
@@ -834,7 +834,7 @@ function resetAll(){if(!confirm('确定重置你的学习进度（含真题记�
 
 // --- 多用户系统 ---
 function showLogin(switchMode){
-  document.getElementById('loginOverlay').classList.add('show');
+  document.getElementById('loginOverlay').classList.remove('hidden');
   document.getElementById('loginInp').value='';
   document.getElementById('loginInp').focus();
 
@@ -863,7 +863,7 @@ function showLogin(switchMode){
 
 function switchToUser(name){
   if(!name.trim()) return;
-  if(name===USER){document.getElementById('loginOverlay').classList.remove('show');return}
+  if(name===USER){document.getElementById('loginOverlay').classList.add('hidden');return}
   localStorage.setItem('cpa_user',name);
   USER=name;
   loadUserData();
@@ -892,13 +892,12 @@ document.getElementById('loginInp').addEventListener('keydown',function(e){
   if(e.key==='Enter') document.getElementById('loginBtn').click();
 });
 
-// Init: if user exists, load data; otherwise show login
+// Init: if user exists, hide login and load data
 if(USER){
+  document.getElementById('loginOverlay').classList.add('hidden');
   loadUserData();
   loadExam();
   document.getElementById('userBtn').textContent='👤'+USER;
-} else {
-  showLogin();
 }
 
 // pages
